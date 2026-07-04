@@ -1,0 +1,8 @@
+{
+  "name": "EduClass",
+  "description": "An educational training platform inspired by Google Classroom",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
