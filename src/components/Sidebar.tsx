@@ -4,13 +4,14 @@ import { ClassItem } from '../types';
 
 interface SidebarProps {
   isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
   classes: ClassItem[];
   onClassSelect: (classId: string) => void;
   onHomeSelect: () => void;
   currentClassId: string | null;
 }
 
-export function Sidebar({ isOpen, classes, onClassSelect, onHomeSelect, currentClassId }: SidebarProps) {
+export function Sidebar({ isOpen, setIsOpen, classes, onClassSelect, onHomeSelect, currentClassId }: SidebarProps) {
   if (!isOpen) return null;
 
   return (

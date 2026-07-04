@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User in the system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "role": { "type": "string" }
+      },
+      "required": ["id", "name", "role"]
+    },
+    "ClassItem": {
+      "title": "ClassItem",
+      "description": "Class information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "section": { "type": "string" },
+        "subject": { "type": "string" },
+        "room": { "type": "string" },
+        "themeColor": { "type": "string" },
+        "teacherId": { "type": "string" }
+      },
+      "required": ["id", "name", "themeColor", "teacherId"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Announcement in a class",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "classId", "authorId", "content", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "Comment on an announcement",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "authorId": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "authorId", "content", "createdAt"]
+    },
+    "Assignment": {
+      "title": "Assignment",
+      "description": "Assignment in a class",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "topic": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "classId", "title", "description", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "User",
+      "description": "Users collection"
+    },
+    "classes": {
+      "schema": "ClassItem",
+      "description": "Classes collection"
+    },
+    "announcements": {
+      "schema": "Announcement",
+      "description": "Announcements collection"
+    },
+    "comments": {
+      "schema": "Comment",
+      "description": "Comments collection"
+    },
+    "assignments": {
+      "schema": "Assignment",
+      "description": "Assignments collection"
+    }
+  }
+}
