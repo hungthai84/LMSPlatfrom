@@ -170,7 +170,7 @@ function TabButton({ children, active, onClick }: { children: React.ReactNode, a
   );
 }
 
-function AnnouncementCard({ announcement }: { announcement: Announcement }) {
+const AnnouncementCard: React.FC<{ announcement: Announcement }> = ({ announcement }) => {
   const author = mockUsers[announcement.authorId];
   
   return (
@@ -225,7 +225,7 @@ function AnnouncementCard({ announcement }: { announcement: Announcement }) {
       </div>
     </div>
   );
-}
+};
 
 function PlusIcon() {
   return (

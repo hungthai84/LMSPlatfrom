@@ -25,7 +25,7 @@ export function Dashboard({ classes, onClassSelect }: DashboardProps) {
   );
 }
 
-function ClassCard({ classItem, teacher, onClick }: { classItem: ClassItem, teacher: User, onClick: () => void }) {
+const ClassCard: React.FC<{ classItem: ClassItem, teacher: User, onClick: () => void }> = ({ classItem, teacher, onClick }) => {
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer flex flex-col h-72">
       <div 
@@ -67,4 +67,4 @@ function ClassCard({ classItem, teacher, onClick }: { classItem: ClassItem, teac
       </div>
     </div>
   );
-}
+};

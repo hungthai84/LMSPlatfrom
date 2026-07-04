@@ -60,19 +60,19 @@ export function Sidebar({ isOpen, classes, onClassSelect, onHomeSelect, currentC
   );
 }
 
-function NavItem({ 
-  icon, 
-  label, 
-  subLabel,
-  onClick, 
-  isActive 
-}: { 
+const NavItem: React.FC<{ 
   icon: React.ReactNode, 
   label: string, 
   subLabel?: string,
   onClick: () => void, 
   isActive?: boolean 
-}) {
+}> = ({ 
+  icon, 
+  label, 
+  subLabel,
+  onClick, 
+  isActive 
+}) => {
   return (
     <button
       onClick={onClick}
@@ -87,4 +87,4 @@ function NavItem({
       </div>
     </button>
   );
-}
+};
