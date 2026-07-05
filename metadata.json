@@ -1,8 +1,6 @@
 {
-  "name": "EduClass",
-  "description": "An educational training platform inspired by Google Classroom",
+  "name": "Google Classroom Clone",
+  "description": "Website đào tạo trực tuyến mô phỏng giao diện và tính năng Google Lớp học với trợ lý AI tích hợp.",
   "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

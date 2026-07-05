@@ -1,7 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Play", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f8f9fa;
+  color: #3c4043;
+  overflow-y: hidden; /* Always hide main vertical scrollbar */
+}
+
+/* Always hide vertical scrollbars globally as requested in Rule 6 */
+* {
+  scrollbar-width: none; /* Firefox */
+}
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+
