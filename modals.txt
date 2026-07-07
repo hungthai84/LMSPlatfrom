@@ -1,0 +1,530 @@
+      {showJoinModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <form
+            onSubmit={handleJoinClassSubmit}
+            className="bg-white rounded-xl shadow-2xl border border-gray-100 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200"
+          >
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-5 h-5" />
+                <h3 className="font-bold text-sm">Tham gia lớp học bằng mã</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowJoinModal(false)}
+                className="text-white hover:text-gray-200 text-xs font-bold w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-5 space-y-4">
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Nhập mã lớp học do giáo viên của bạn chia sẻ để gia nhập phòng học. Bạn sẽ có thể theo dõi tài liệu, hoàn thành bài tập nộp cho giáo viên của mình.
+              </p>
+
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
+                  Mã phòng học lớp học
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={joinCode}
+                  onChange={(e) => {
+                    setJoinCode(e.target.value);
+                    setJoinError("");
+                  }}
+                  placeholder="Ví dụ: react101"
+                  className="w-full rounded border border-gray-300 p-3 text-sm outline-none font-bold focus:border-blue-500 text-center uppercase tracking-widest"
+                />
+                {joinError && (
+                  <p className="text-xs text-red-600 font-semibold mt-1.5 flex items-center gap-1">
+                    ⚠️ {joinError}
+                  </p>
+                )}
+              </div>
+
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-100 text-[10px] text-gray-600 leading-normal">
+                <p className="font-bold text-blue-800 mb-1">Mã lớp học mô phỏng có sẵn:</p>
+                - Lớp chuyên sâu: <code className="font-bold font-mono">react101</code><br />
+                - Lớp Tiếng Anh: <code className="font-bold font-mono">engcomm</code><br />
+                - Lớp Thiết kế UIUX: <code className="font-bold font-mono">uiux404</code>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 px-4 py-3 border-t border-gray-100 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setShowJoinModal(false)}
+                className="rounded-lg px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-100 cursor-pointer"
+              >
+                Hủy bỏ
+              </button>
+              <button
+                type="submit"
+                disabled={!joinCode.trim()}
+                className={`rounded-lg px-5 py-2 text-xs font-bold text-white shadow-sm transition-colors cursor-pointer ${
+                  joinCode.trim() ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-300 cursor-not-allowed"
+                }`}
+              >
+                Gia nhập ngay
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Create Class Modal */}
+      {showCreateClassModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <form
+            onSubmit={handleCreateClassSubmit}
+            className="bg-white rounded-xl shadow-2xl border border-gray-100 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200"
+          >
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Plus className="w-5 h-5" />
+                <h3 className="font-bold text-sm">Tạo lớp học trực tuyến mới</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowCreateClassModal(false)}
+                className="text-white hover:text-gray-200 text-xs font-bold w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-5 space-y-4">
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  Tên lớp học (Bắt buộc)
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newClassName}
+                  onChange={(e) => setNewClassName(e.target.value)}
+                  placeholder="Ví dụ: Lập trình ReactJS & NextJS nâng cao"
+                  className="w-full rounded border border-gray-350 p-2.5 text-sm outline-none focus:border-blue-500 font-semibold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  Phân viện / Ngành đào tạo
+                </label>
+                <input
+                  type="text"
+                  value={newClassSec}
+                  onChange={(e) => setNewClassSec(e.target.value)}
+                  placeholder="Ví dụ: Công nghệ thông tin - K22"
+                  className="w-full rounded border border-gray-300 p-2.5 text-sm outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  Chủ đề giảng dạy
+                </label>
+                <input
+                  type="text"
+                  value={newClassSub}
+                  onChange={(e) => setNewClassSub(e.target.value)}
+                  placeholder="Ví dụ: Thiết kế phát triển Frontend Web"
+                  className="w-full rounded border border-gray-300 p-2.5 text-sm outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                  Phòng học ảo / Địa điểm
+                </label>
+                <input
+                  type="text"
+                  value={newClassRoom}
+                  onChange={(e) => setNewClassRoom(e.target.value)}
+                  placeholder="Ví dụ: Zoom Meet ID: 888-222"
+                  className="w-full rounded border border-gray-300 p-2.5 text-sm outline-none focus:border-blue-500"
+                />
+              </div>
+            </div>
+
+            <div className="bg-gray-50 px-4 py-3 border-t border-gray-100 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setShowCreateClassModal(false)}
+                className="rounded-lg px-4 py-2 text-xs font-bold text-gray-500 hover:bg-gray-100 cursor-pointer"
+              >
+                Hủy bỏ
+              </button>
+              <button
+                type="submit"
+                disabled={!newClassName.trim()}
+                className={`rounded-lg px-5 py-2 text-xs font-bold text-white shadow-sm transition-colors cursor-pointer ${
+                  newClassName.trim() ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-300 cursor-not-allowed"
+                }`}
+              >
+                Khởi tạo ngay
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* --- DYNAMIC CUSTOMIZABLE SETTINGS DIALOG (Rule 8 & 9) --- */}
+      {showSettingsModal && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-md">
+          <div className="bg-white rounded-xl shadow-2xl border border-gray-100 w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Settings className="w-5 h-5 text-indigo-400" />
+                <h3 className="font-bold text-sm">Cài đặt giao diện & Hình nền</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowSettingsModal(false)}
+                className="text-white hover:text-gray-200 text-xs font-bold w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
+              
+              {/* Opacity Settings section */}
+              <div>
+                <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider mb-3.5 flex items-center gap-2">
+                  <Sliders className="w-4 h-4 text-blue-500" />
+                  Độ trong suốt các thành phần hiển thị (%):
+                </h4>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                  {/* Website wrapper opacity card */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-gray-700">Độ trong suốt của Thẻ chính:</span>
+                      <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{wrapperOpacity}%</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min="10" 
+                      max="100" 
+                      value={wrapperOpacity}
+                      onChange={(e) => setWrapperOpacity(Number(e.target.value))}
+                      className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                    />
+                    <p className="text-[10px] text-gray-400">Điều chỉnh độ hiển thị mờ đục hoặc trong suốt của website so với hình nền.</p>
+                  </div>
+
+                  {/* Sidebar opacity card */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-gray-700">Độ trong suốt của Sidebar:</span>
+                      <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">{sidebarOpacity}%</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min="10" 
+                      max="100" 
+                      value={sidebarOpacity}
+                      onChange={(e) => setSidebarOpacity(Number(e.target.value))}
+                      className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                    />
+                    <p className="text-[10px] text-gray-400">Chỉnh độ mờ cho Sidebar danh mục nằm bên trái của website.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wallpaper settings section (Rule 9) */}
+              <div>
+                <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <Eye className="w-4 h-4 text-emerald-500" />
+                  Lựa chọn Hình nền Premium hệ thống:
+                </h4>
+
+                {/* Categories */}
+                <div className="space-y-5">
+                  
+                  {/* Category 1: Image Wallpapers */}
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">1. Hình nền tĩnh (Image Wallpapers)</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {IMAGE_WALLPAPERS.map((wp) => (
+                        <div 
+                          key={wp.url}
+                          onClick={() => {
+                            setWallpaperType("image");
+                            setCurrentWallpaper(wp.url);
+                            showToast(`Đã áp dụng hình nền tĩnh: ${wp.name}`);
+                          }}
+                          className={`group cursor-pointer rounded-lg border overflow-hidden transition-all relative ${
+                            wallpaperType === "image" && currentWallpaper === wp.url 
+                              ? "border-blue-500 ring-2 ring-blue-500/20 scale-102" 
+                              : "border-gray-200 hover:border-blue-400"
+                          }`}
+                        >
+                          <img 
+                            src={wp.thumbnail} 
+                            alt={wp.name} 
+                            className="h-16 w-full object-cover group-hover:scale-105 transition-transform"
+                          />
+                          <div className="p-1.5 bg-white text-center">
+                            <p className="text-[10px] font-bold text-gray-850 truncate">{wp.name}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category 2: Video Wallpapers */}
+                  <div className="space-y-2 pt-1">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">2. Hình nền động Video (Video Wallpapers)</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {VIDEO_WALLPAPERS.map((wp) => (
+                        <div 
+                          key={wp.url}
+                          onClick={() => {
+                            setWallpaperType("video");
+                            setCurrentWallpaper(wp.url);
+                            showToast(`Đã áp dụng hình nền động: ${wp.name}`);
+                          }}
+                          className={`group cursor-pointer rounded-lg border overflow-hidden transition-all relative ${
+                            wallpaperType === "video" && currentWallpaper === wp.url 
+                              ? "border-indigo-500 ring-2 ring-indigo-500/20 scale-102" 
+                              : "border-gray-200 hover:border-indigo-400"
+                          }`}
+                        >
+                          <div className="h-16 bg-slate-900 relative flex items-center justify-center">
+                            <span className="text-[10px] bg-indigo-600 text-white font-bold px-2 py-0.5 rounded-full absolute top-1 right-1">Video</span>
+                            <video src={wp.thumbnail} muted loop autoPlay className="h-full w-full object-cover opacity-60" />
+                          </div>
+                          <div className="p-1.5 bg-white text-center">
+                            <p className="text-[10px] font-bold text-gray-850 truncate">{wp.name}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category 3: Gradient Wallpapers */}
+                  <div className="space-y-2 pt-1">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">3. Màu Gradient CSS (Gradient Wallpapers)</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {GRADIENT_WALLPAPERS.map((wp) => (
+                        <div 
+                          key={wp.url}
+                          onClick={() => {
+                            setWallpaperType("gradient");
+                            setCurrentWallpaper(wp.url);
+                            showToast(`Đã áp dụng dải màu: ${wp.name}`);
+                          }}
+                          className={`group cursor-pointer rounded-lg border overflow-hidden transition-all relative ${
+                            wallpaperType === "gradient" && currentWallpaper === wp.url 
+                              ? "border-violet-500 ring-2 ring-violet-500/20 scale-102" 
+                              : "border-gray-200 hover:border-violet-400"
+                          }`}
+                        >
+                          <div className="h-16 w-full" style={{ background: wp.thumbnail }} />
+                          <div className="p-1.5 bg-white text-center">
+                            <p className="text-[10px] font-bold text-gray-850 truncate">{wp.name}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category 4: Custom Patterns */}
+                  <div className="space-y-2 pt-1">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">4. Họa tiết đồ họa & Vũ trụ (Custom Patterns)</span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {PATTERN_WALLPAPERS.map((wp) => (
+                        <div 
+                          key={wp.url}
+                          onClick={() => {
+                            setWallpaperType("pattern");
+                            setCurrentWallpaper(wp.url);
+                            showToast(`Đã áp dụng họa tiết: ${wp.name}`);
+                          }}
+                          className={`group cursor-pointer rounded-lg border overflow-hidden transition-all relative ${
+                            wallpaperType === "pattern" && currentWallpaper === wp.url 
+                              ? "border-amber-500 ring-2 ring-amber-500/20 scale-102" 
+                              : "border-gray-200 hover:border-amber-400"
+                          }`}
+                        >
+                          <div className="h-16 w-full bg-slate-900 flex items-center justify-center p-1">
+                            <span className="text-[9px] font-bold text-white uppercase text-center bg-white/20 px-1.5 py-0.5 rounded tracking-wider">{wp.name}</span>
+                          </div>
+                          <div className="p-1.5 bg-white text-center">
+                            <p className="text-[10px] font-bold text-gray-850 truncate">{wp.name}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div className="bg-gray-50 p-4 border-t border-gray-150 flex justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setWrapperOpacity(95);
+                  setSidebarOpacity(90);
+                  setWallpaperType("image");
+                  setCurrentWallpaper("https://i.ibb.co/G47jTb1g/minimalist-white-background-3840x2160-bright-space-clean-aesthetic-27644.jpg");
+                  showToast("Khôi phục cấu hình mặc định ban đầu");
+                }}
+                className="rounded-lg px-4 py-2 text-xs font-bold text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+              >
+                Khôi phục mặc định
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowSettingsModal(false)}
+                className="rounded-lg px-6 py-2 bg-blue-600 hover:bg-blue-700 text-xs font-bold text-white shadow-sm cursor-pointer"
+              >
+                Hoàn tất
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- NOTIFICATIONS COMPONENT PANEL --- */}
+      {showNotificationsPanel && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-end p-4 backdrop-blur-xs">
+          <div className="bg-white rounded-xl shadow-2xl border border-gray-100 w-full max-w-sm h-[80vh] flex flex-col overflow-hidden animate-in slide-in-from-right duration-200">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Bell className="w-4.5 h-4.5 text-yellow-300" />
+                <h3 className="font-bold text-sm">Hộp thông báo tức thời</h3>
+              </div>
+              <button 
+                onClick={() => setShowNotificationsPanel(false)}
+                className="text-white hover:text-gray-200 text-xs font-bold w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {[
+                { id: 1, title: "AI Trợ lý học thuật", text: "Trợ lý học thuật vừa cập nhật tài liệu hướng dẫn xây dựng đề cương 5 bài học thông minh.", date: "Hôm nay", tag: "AI" },
+                { id: 2, title: "Lớp học Lập trình ReactJS", text: "Giáo viên Minh đã đăng tải một câu hỏi thực hành mới: Kiểm tra & thực hành Chương 1.", date: "Hôm qua", tag: "Bài tập" },
+                { id: 3, title: "Hệ thống Power Service", text: "Hình nền động Video Space Universe đã được đưa vào kho lưu trữ hình nền cài đặt của bạn.", date: "2 ngày trước", tag: "Hệ thống" }
+              ].map((notif) => (
+                <div key={notif.id} className="p-3 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100/70 transition-colors text-xs">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-bold text-gray-850">{notif.title}</span>
+                    <span className="text-[9px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">{notif.tag}</span>
+                  </div>
+                  <p className="text-gray-500 leading-normal">{notif.text}</p>
+                  <span className="text-[10px] text-gray-400 mt-1.5 block font-medium">{notif.date}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-gray-50 p-3 text-center border-t border-gray-100">
+              <button 
+                onClick={() => {
+                  setShowNotificationsPanel(false);
+                  showToast("Đã đánh dấu đọc tất cả thông báo.");
+                }}
+                className="text-[11px] font-bold text-blue-600 hover:underline"
+              >
+                Đánh dấu đọc tất cả
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- REFINED DOCUMENTATION TUTORIAL MODAL --- */}
+      {showGuideModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-xl shadow-2xl border border-gray-100 w-full max-w-xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-yellow-300 animate-spin" />
+                <h3 className="font-bold text-sm">Tài liệu hướng dẫn & Tính năng chính</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowGuideModal(false)}
+                className="text-white hover:text-gray-200 text-xs font-bold w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4 text-xs text-gray-600 leading-relaxed max-h-[70vh] overflow-y-auto">
+              <p className="font-bold text-sm text-gray-800 mb-2">
+                Chào mừng bạn đến với Website Đào Tạo Trực Tuyến mô phỏng Google Lớp Học của Power Service!
+              </p>
+
+              <div className="space-y-3">
+                <div className="p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-lg">
+                  <p className="font-bold text-indigo-800 mb-0.5">🌟 1. Trợ lý Trí tuệ Nhân tạo AI thông minh</p>
+                  Bạn có thể bấm vào nút **"AI Trợ lý"** hoặc **"Trợ lý AI Đề cương"** trên thanh danh mục để tự động tạo đề cương chi tiết 5 bài học cho bất kỳ chủ đề nào, hoặc hướng dẫn giải bài tập thực tế.
+                </div>
+
+                <div className="p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg">
+                  <p className="font-bold text-amber-800 mb-0.5">🎨 2. Thay đổi Hình nền & Tùy chỉnh Độ mờ</p>
+                  Bấm biểu tượng **"Cài đặt hệ thống"** ở dưới thanh danh mục bên trái để tùy chỉnh độ trong suốt của Thẻ chính, thanh Menu và lựa chọn từ hàng chục hình nền ảnh, video động, gradient hay họa tiết vũ trụ.
+                </div>
+
+                <div className="p-3 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg">
+                  <p className="font-bold text-emerald-800 mb-0.5">🛠️ 3. Mô phỏng Đầy đủ vai trò Giáo viên & Học viên</p>
+                  Nhấp vào ảnh đại diện của bạn ở góc phải thanh công cụ phía trên để tự do hoán đổi vai trò giáo viên (để tạo lớp, giao bài tập, chấm điểm trực tiếp) và học viên (để vào lớp học, nộp bài, xem báo cáo điểm).
+                </div>
+              </div>
+
+              <div className="border-t border-gray-100 pt-3">
+                <p className="font-bold text-gray-700 mb-1">Mã lớp học mẫu dành cho học viên:</p>
+                <ul className="list-disc list-inside space-y-1 pl-1 font-semibold text-gray-600">
+                  <li>Lớp Lập trình Web: <span className="font-mono text-blue-600">react101</span></li>
+                  <li>Lớp Giao tiếp tiếng Anh: <span className="font-mono text-blue-600">engcomm</span></li>
+                  <li>Lớp Thiết kế UI/UX: <span className="font-mono text-blue-600">uiux404</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 px-4 py-3 border-t border-gray-100 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowGuideModal(false)}
+                className="rounded-lg px-6 py-2 bg-blue-600 hover:bg-blue-700 text-xs font-bold text-white shadow-sm cursor-pointer"
+              >
+                Đã hiểu
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 5. Gemini Assistant Slide-out Drawer */}
+      <GeminiDrawer
+        isOpen={isGeminiOpen}
+        onClose={() => {
+          setIsGeminiOpen(false);
+          setGeminiContextClasswork(null);
+        }}
+        mode={geminiMode}
+        contextClasswork={geminiContextClasswork}
+        subjectName={activeClass?.name}
+      />
+
+      {/* 6. Global Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-gray-900/95 text-white px-5 py-3 text-xs font-semibold shadow-2xl border border-gray-800 animate-in fade-in slide-in-from-bottom-2 duration-200">
+          {toastMessage}
+        </div>
+      )}
+    </div>
+  );
+}

@@ -77,7 +77,30 @@ export const DEFAULT_CLASSES: ClassItem[] = [
     teacherName: "Cô Nguyễn Thu Hà",
     teacherAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150",
     students: ["student-1", "student-3"]
-  }
+  },
+  ...Array.from({ length: 10 }, (_, i) => ({
+    id: `class-${i + 4}`,
+    name: `Lớp Demo ${i + 1}`,
+    section: `Nhóm ${i + 1}`,
+    subject: `Môn Học ${i + 1}`,
+    room: `Phòng ${i + 1}`,
+    code: `demo${i + 1}`,
+    bannerGradient: "linear-gradient(135deg, #607d8b 0%, #90a4ae 100%)",
+    teacherId: "teacher-1",
+    teacherName: "Cô Nguyễn Thu Hà",
+    teacherAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150",
+    students: []
+  }))
+,
+
+  { id: "class-4", name: "Lập trình ReactJS", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P301", code: "react23", bannerGradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] },
+  { id: "class-5", name: "Lập trình NodeJS", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P302", code: "node23", bannerGradient: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] },
+  { id: "class-6", name: "Lập trình Python", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P303", code: "py23", bannerGradient: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] },
+  { id: "class-7", name: "Cơ sở Dữ liệu", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P304", code: "db23", bannerGradient: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] },
+  { id: "class-8", name: "Hệ điều hành", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P305", code: "os23", bannerGradient: "linear-gradient(135deg, #ec4899 0%, #db2777 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] },
+  { id: "class-9", name: "Mạng máy tính", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P306", code: "net23", bannerGradient: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] },
+  { id: "class-10", name: "An toàn thông tin", section: "Khóa K23", subject: "Công nghệ phần mềm", room: "Tòa A - P307", code: "sec23", bannerGradient: "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)", teacherId: "u1", teacherName: "Admin User", teacherAvatar: "https://i.ibb.co/3s8sXbN/avatar-1.jpg", students: ["u2", "u3", "u4", "u5"] }
+
 ];
 
 export const DEFAULT_ANNOUNCEMENTS: Announcement[] = [

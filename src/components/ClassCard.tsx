@@ -3,6 +3,7 @@ import { Folder, MoreVertical, Copy, ClipboardList } from "lucide-react";
 import { ClassItem } from "../types";
 
 interface ClassCardProps {
+  cardOpacity?: number;
   key?: string;
   classItem: ClassItem;
   onSelect: (id: string) => void;
@@ -14,7 +15,8 @@ export default function ClassCard({
   classItem,
   onSelect,
   onCopyCode,
-  activeUserRole
+  activeUserRole,
+  cardOpacity = 100
 }: ClassCardProps) {
   const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -24,12 +26,12 @@ export default function ClassCard({
   return (
     <div 
       onClick={() => onSelect(classItem.id)}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-200 hover:shadow-md cursor-pointer h-[280px]"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 transition-all duration-200 hover:shadow-md cursor-pointer h-[280px]" style={{ backgroundColor: `rgba(255, 255, 255, ${cardOpacity / 100})`, backdropFilter: cardOpacity < 100 ? "blur(10px)" : "none" }}
     >
       {/* Top Header Banner */}
       <div 
         style={{ background: classItem.bannerGradient }} 
-        className="relative flex flex-col justify-between p-4 text-white h-[110px] rounded-t-xl"
+        className="relative flex flex-col justify-between p-6 text-white h-[130px] rounded-t-xl"
       >
         <div className="flex items-start justify-between">
           <div className="pr-4">
@@ -69,7 +71,7 @@ export default function ClassCard({
       </div>
 
       {/* Card Content - Upcoming Tasks */}
-      <div className="flex-1 p-4 pt-6 text-xs text-[#5f6368] border-b border-gray-100 flex flex-col justify-between select-none">
+      <div className="flex-1 p-6 pt-6 text-xs text-[#5f6368] border-b border-gray-100 flex flex-col justify-between select-none">
         <div>
           <p className="font-semibold text-[10px] text-gray-400 uppercase tracking-wider mb-2">
             Sắp diễn ra
