@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Play:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Play", "Geist", "SF Pro Display", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Play", "Geist", "SF Pro Display", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Play", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Play", sans-serif;
 
   /* HỆ THỐNG TYPOGRAPHY CHO DOANH NGHIỆP */
   --text-xs: 11px; 

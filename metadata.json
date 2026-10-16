@@ -1,6 +1,6 @@
 {
-  "name": "Google Classroom Clone",
-  "description": "Website đào tạo trực tuyến mô phỏng giao diện và tính năng Google Lớp học với trợ lý AI tích hợp.",
+  "name": "EduSmart Online Learning",
+  "description": "Website đào tạo trực tuyến thông minh EduSmart với trợ lý AI và quản lý tiến độ học tập chi tiết.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

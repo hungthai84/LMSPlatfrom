@@ -17,10 +17,10 @@ export const DEFAULT_USERS: UserProfile[] = [
   },
   {
     id: "student-1",
-    name: "Nguyễn Văn Nam",
+    name: "Nguyễn Văn A",
     role: "student",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150",
-    email: "nam.nv26@student.edu.vn"
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150",
+    email: "anv.smart@student.edu.vn"
   },
   {
     id: "student-2",
