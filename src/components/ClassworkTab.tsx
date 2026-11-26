@@ -8,6 +8,8 @@ import {
   Paperclip
 } from "lucide-react";
 import { ClassItem, Classwork, UserProfile, Submission, QuizQuestion, Attachment } from "../types";
+import { useLms } from "../contexts/LmsContext";
+import { tr } from "../i18n/translations";
 
 interface ClassworkTabProps {
   classItem: ClassItem;
@@ -36,6 +38,7 @@ export default function ClassworkTab({
   onOpenGrading,
   onOpenAiHelper
 }: ClassworkTabProps) {
+  const { language } = useLms();
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showCreateDropdown, setShowCreateDropdown] = useState(false);
@@ -344,21 +347,21 @@ export default function ClassworkTab({
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
+    <div className="mx-auto max-w-4xl px-2 sm:px-4 py-4 sm:py-6">
       {/* Top action header */}
-      <div className="mb-6 flex items-center justify-between border-b border-gray-100 pb-4">
-        <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
+      <div className="mb-6 flex items-center justify-between border-b border-white/60 pb-4">
+        <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
           <BookOpen className="h-5 w-5 text-blue-600" />
-          Nội dung học tập
+          {tr(language, "Nội dung học tập", "Classwork & Materials")}
         </h2>
         {activeUser.role === "teacher" && (
           <div className="relative">
             <button
               onClick={() => setShowCreateDropdown(!showCreateDropdown)}
-              className="flex items-center gap-2 rounded-full bg-[#1e88e5] px-5 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-[#1565c0] active:scale-95 transition-all cursor-pointer"
+              className="flex items-center gap-2 rounded-[14px] bg-blue-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
             >
               <Plus className="h-4 w-4 stroke-[3px]" />
-              Tạo
+              {tr(language, "Tạo", "Create")}
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
             {showCreateDropdown && (
@@ -367,7 +370,7 @@ export default function ClassworkTab({
                   className="fixed inset-0 z-20 cursor-default" 
                   onClick={() => setShowCreateDropdown(false)} 
                 />
-                <div className="absolute right-0 mt-2 w-64 rounded-xl border border-gray-200 bg-white py-1.5 shadow-xl z-30 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="glass-liquid-card absolute right-0 mt-2 w-64 rounded-[14px] border border-white/70 py-1.5 shadow-xl z-30">
                   <button
                     onClick={() => {
                       setNewType("assignment");
@@ -461,45 +464,34 @@ export default function ClassworkTab({
 
       {/* Main List grouped by topic */}
       {classworkItems.length === 0 ? (
-        <div className="rounded-xl border border-[#dadce0] bg-white p-16 text-center text-gray-500 shadow-sm max-w-2xl mx-auto mt-10">
-          <div className="flex justify-center mb-6">
-            <svg className="w-56 h-36 text-gray-300" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="50" y="30" width="100" height="60" rx="4" fill="#e8eaed" stroke="#dadce0" strokeWidth="2" />
-              <rect x="58" y="36" width="84" height="48" rx="2" fill="white" />
+        <div className="glass-liquid-card rounded-[14px] border border-white/60 p-8 sm:p-14 text-center text-slate-500 shadow-sm max-w-2xl mx-auto mt-6">
+          <div className="flex justify-center mb-5">
+            <svg className="w-48 h-32 text-slate-300" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="50" y="30" width="100" height="60" rx="14" fill="#e8eaed" stroke="#dadce0" strokeWidth="2" />
+              <rect x="58" y="36" width="84" height="48" rx="8" fill="white" />
               <path d="M40 90H160C164 90 164 96 160 96H40C36 96 36 90 40 90Z" fill="#bdc1c6" />
               <rect x="92" y="90" width="16" height="4" fill="#9aa0a6" />
-              <path d="M125 50 C125 40, 135 40, 135 50 C135 55, 145 55, 145 50 C145 40, 155 40, 155 50 L155 75 L125 75 Z" fill="#e8eaed" />
-              <circle cx="132" cy="52" r="2" fill="#5f6368" />
-              <circle cx="148" cy="52" r="2" fill="#5f6368" />
-              <path d="M136 60 Q140 64 144 60" stroke="#5f6368" strokeWidth="1.5" strokeLinecap="round" />
-              <rect x="18" y="42" width="24" height="30" rx="2" transform="rotate(-15 18 42)" fill="#dadce0" stroke="#9aa0a6" strokeWidth="1.5" />
-              <line x1="24" y1="50" x2="36" y2="47" stroke="#bdc1c6" strokeWidth="2" transform="rotate(-15 24 50)" />
-              <line x1="26" y1="56" x2="38" y2="53" stroke="#bdc1c6" strokeWidth="2" transform="rotate(-15 26 56)" />
-              <path d="M165 25 L167 29 L171 31 L167 33 L165 37 L163 33 L159 31 L163 29 Z" fill="#fbbc05" />
-              <path d="M35 15 L36.5 18 L39.5 19.5 L36.5 21 L35 24 L33.5 21 L30.5 19.5 L33.5 18 Z" fill="#4285f4" />
             </svg>
           </div>
-          <h3 className="text-base font-bold text-gray-800">Đây là nơi giao bài tập</h3>
-          <p className="text-xs text-gray-400 mt-2 max-w-md mx-auto leading-relaxed">
-            Bạn có thể thêm bài tập và các công việc khác cho lớp rồi sắp xếp thành các chủ đề
+          <h3 className="text-base font-bold text-slate-800">{tr(language, "Đây là nơi giao bài tập", "This is where you assign work")}</h3>
+          <p className="text-xs text-slate-500 mt-2 max-w-md mx-auto leading-relaxed">
+            {tr(language, "Bạn có thể thêm bài tập và các công việc khác cho lớp rồi sắp xếp thành các chủ đề", "Add assignments and learning materials, then organize them into topics.")}
           </p>
         </div>
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {topics.map((topic) => {
             const topicItems = classworkItems.filter((cw) => (cw.topic || "Chung") === topic);
             return (
               <div key={topic} className="space-y-3">
-                {/* Topic Header */}
-                <h3 className="border-b border-[#1e88e5] pb-2 text-sm font-bold text-[#1e88e5] select-none flex items-center justify-between">
+                <h3 className="border-b border-blue-500/40 pb-2 text-sm font-bold text-blue-600 select-none flex items-center justify-between">
                   <span>{topic}</span>
                   {topicItems.length === 0 && (
-                    <span className="text-[10px] font-normal text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Chủ đề trống</span>
+                    <span className="text-[10px] font-normal text-slate-400 bg-white/60 px-2 py-0.5 rounded-[14px]">{tr(language, "Chủ đề trống", "Empty topic")}</span>
                   )}
                 </h3>
 
-                {/* Items in Topic */}
-                <div className="divide-y divide-gray-100 rounded-xl border border-[#dadce0] bg-white overflow-hidden shadow-sm">
+                <div className="glass-liquid-card divide-y divide-white/50 rounded-[14px] border border-white/60 overflow-hidden shadow-sm">
                   {topicItems.length === 0 ? (
                     <div className="p-6 text-center text-xs text-gray-400 select-none">
                       Học viên sẽ thấy chủ đề này sau khi có bài đăng được thêm vào đây
@@ -634,10 +626,10 @@ export default function ClassworkTab({
                                 {activeUser.role === "student" && (
                                   <button
                                     onClick={() => onOpenAiHelper(cw)}
-                                    className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:from-indigo-600 hover:to-purple-700 transition-colors cursor-pointer"
+                                    className="flex items-center gap-1.5 rounded-[14px] bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 text-xs font-bold text-white shadow-sm hover:from-indigo-600 hover:to-purple-700 transition-colors cursor-pointer"
                                   >
                                     <Sparkles className="h-4 w-4 animate-pulse" />
-                                    Hỏi Trợ lý Học tập AI về bài này
+                                    {tr(language, "Hỏi Trợ lý Học tập AI về bài này", "Ask AI Tutor about this")}
                                   </button>
                                 )}
                               </div>
@@ -646,39 +638,39 @@ export default function ClassworkTab({
                               <div className="md:col-span-1">
                                 {/* Teacher Grading Overview Grid */}
                                 {activeUser.role === "teacher" && isGradable && (
-                                  <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-                                    <h5 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">
-                                      Trạng thái nộp bài
+                                  <div className="rounded-[14px] border border-white/70 bg-white/75 p-4 shadow-sm">
+                                    <h5 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                                      {tr(language, "Trạng thái nộp bài", "Submission status")}
                                     </h5>
                                     <div className="grid grid-cols-3 gap-2 text-center mb-4">
-                                      <div className="border-r border-gray-100 py-1">
+                                      <div className="border-r border-slate-100 py-1">
                                         <p className="text-lg font-bold text-blue-600">{turnedInCount}</p>
-                                        <p className="text-[9px] text-gray-400 font-bold uppercase">Đã nộp</p>
+                                        <p className="text-[9px] text-slate-400 font-bold uppercase">{tr(language, "Đã nộp", "Turned in")}</p>
                                       </div>
-                                      <div className="border-r border-gray-100 py-1">
-                                        <p className="text-lg font-bold text-green-600">{gradedCount}</p>
-                                        <p className="text-[9px] text-gray-400 font-bold uppercase">Đã chấm</p>
+                                      <div className="border-r border-slate-100 py-1">
+                                        <p className="text-lg font-bold text-emerald-600">{gradedCount}</p>
+                                        <p className="text-[9px] text-slate-400 font-bold uppercase">{tr(language, "Đã chấm", "Graded")}</p>
                                       </div>
                                       <div className="py-1">
                                         <p className="text-lg font-bold text-red-500">{assignedCount}</p>
-                                        <p className="text-[9px] text-gray-400 font-bold uppercase">Chưa nộp</p>
+                                        <p className="text-[9px] text-slate-400 font-bold uppercase">{tr(language, "Chưa nộp", "Assigned")}</p>
                                       </div>
                                     </div>
                                     <button
                                       onClick={() => onOpenGrading(cw.id)}
-                                      className="w-full flex justify-center items-center gap-1.5 rounded bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors cursor-pointer"
+                                      className="w-full flex justify-center items-center gap-1.5 rounded-[14px] bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors cursor-pointer"
                                     >
                                       <FileText className="h-3.5 w-3.5" />
-                                      Xem bài làm & chấm điểm
+                                      {tr(language, "Xem bài làm & chấm điểm", "Review & grade")}
                                     </button>
                                   </div>
                                 )}
 
                                 {/* Student Submit Panel - Multi-Format Switcher */}
                                 {activeUser.role === "student" && isGradable && (
-                                  <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-                                    <h5 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 border-b border-gray-50 pb-2">
-                                      {cw.type === "quiz" ? "Làm bài kiểm tra" : "Bài làm của bạn"}
+                                  <div className="rounded-[14px] border border-white/70 bg-white/75 p-4 shadow-sm">
+                                    <h5 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 border-b border-slate-100 pb-2">
+                                      {cw.type === "quiz" ? tr(language, "Làm bài kiểm tra", "Take Quiz") : tr(language, "Bài làm của bạn", "Your Work")}
                                     </h5>
 
                                     {cw.type === "quiz" ? (
@@ -849,11 +841,10 @@ export default function ClassworkTab({
 
       {/* 3. Teacher's Create New Classwork Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-gray-50 z-[999] flex flex-col overflow-hidden animate-in fade-in duration-200">
+        <div className="fixed inset-[15px] rounded-[14px] glass-liquid-shell border border-white/70 z-[999] flex flex-col overflow-hidden shadow-2xl">
           <form onSubmit={handleCreateSubmit} className="flex flex-col h-full">
-            {/* Fullscreen top header */}
-            <div className="bg-white border-b border-gray-200 px-6 py-3.5 flex items-center justify-between shadow-sm shrink-0">
-              <div className="flex items-center gap-4">
+            <div className="bg-white/80 backdrop-blur-md border-b border-white/60 px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-sm shrink-0">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <button
                   type="button"
                   onClick={() => {
@@ -861,11 +852,11 @@ export default function ClassworkTab({
                     setAttachments([]);
                     setActiveAttachType(null);
                   }}
-                  className="p-1.5 rounded-full hover:bg-gray-150 text-gray-500 hover:text-gray-800 transition-colors"
+                  className="p-1.5 rounded-[14px] hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors"
                 >
                   <X className="h-5 w-5" />
                 </button>
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <div className="flex h-9 w-9 items-center justify-center rounded-[14px] bg-blue-50 text-blue-600">
                   {newType === "assignment" ? (
                     <ClipboardList className="h-5 w-5" />
                   ) : newType === "quiz" ? (
@@ -877,8 +868,8 @@ export default function ClassworkTab({
                   )}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800 text-sm sm:text-base leading-none">
-                    {newType === "assignment" ? "Bài tập" : newType === "quiz" ? "Bài kiểm tra" : newType === "question" ? "Câu hỏi" : "Tài liệu"}
+                  <h3 className="font-semibold text-slate-800 text-sm sm:text-base leading-none">
+                    {newType === "assignment" ? tr(language, "Bài tập", "Assignment") : newType === "quiz" ? tr(language, "Bài kiểm tra", "Quiz") : newType === "question" ? tr(language, "Câu hỏi", "Question") : tr(language, "Tài liệu", "Material")}
                   </h3>
                 </div>
               </div>
@@ -886,19 +877,17 @@ export default function ClassworkTab({
               <div className="flex items-center gap-3">
                 <button
                   type="submit"
-                  className="flex items-center gap-1.5 bg-[#1e88e5] text-white px-5 py-2 rounded-full font-bold text-xs shadow-sm hover:bg-[#1565c0] active:scale-95 transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 bg-blue-600 text-white px-5 py-2 rounded-[14px] font-bold text-xs shadow-sm hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
                 >
                   <Save className="h-3.5 w-3.5" />
-                  {newType === "assignment" ? "Giao bài" : newType === "quiz" ? "Giao bài" : newType === "question" ? "Hỏi" : "Đăng"}
+                  {newType === "assignment" || newType === "quiz" ? tr(language, "Giao bài", "Assign") : newType === "question" ? tr(language, "Hỏi", "Ask") : tr(language, "Đăng", "Post")}
                 </button>
               </div>
             </div>
 
-            {/* Fullscreen workspace body */}
             <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-              {/* Left panel: Form fields & Attachments (takes ~70% width) */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
-                <div className="bg-white rounded-xl border border-gray-200 p-5 sm:p-6 space-y-5 shadow-sm">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+                <div className="glass-liquid-card rounded-[14px] border border-white/60 p-5 sm:p-6 space-y-5 shadow-sm">
                   {/* Tiêu đề */}
                   <div className="space-y-1">
                     <input
@@ -1442,16 +1431,16 @@ export default function ClassworkTab({
 
       {/* 4. Add Topic Modal Overlay */}
       {showAddTopicModal && (
-        <div className="fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-xl border border-gray-200 w-full max-w-sm overflow-hidden animate-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[1000] flex items-center justify-center p-4">
+          <div className="glass-liquid-card rounded-[14px] shadow-xl border border-white/70 w-full max-w-sm overflow-hidden">
             <div className="p-5 space-y-4">
-              <h4 className="text-sm font-bold text-gray-800">Thêm chủ đề mới</h4>
+              <h4 className="text-sm font-bold text-slate-800">{tr(language, "Thêm chủ đề mới", "Add New Topic")}</h4>
               <input
                 type="text"
                 value={newTopicName}
                 onChange={(e) => setNewTopicName(e.target.value)}
-                placeholder="Tên chủ đề"
-                className="w-full rounded-lg border border-gray-300 p-2.5 text-xs outline-none focus:border-blue-500"
+                placeholder={tr(language, "Tên chủ đề", "Topic name")}
+                className="w-full rounded-[14px] border border-slate-200 bg-white/80 p-2.5 text-xs outline-none focus:border-blue-500"
               />
               <div className="flex justify-end gap-2 pt-2">
                 <button
@@ -1460,9 +1449,9 @@ export default function ClassworkTab({
                     setShowAddTopicModal(false);
                     setNewTopicName("");
                   }}
-                  className="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-500 hover:bg-gray-100"
+                  className="px-3.5 py-1.5 rounded-[14px] text-xs font-bold text-slate-600 hover:bg-white/80"
                 >
-                  Hủy bỏ
+                  {tr(language, "Hủy bỏ", "Cancel")}
                 </button>
                 <button
                   type="button"
@@ -1475,9 +1464,9 @@ export default function ClassworkTab({
                       setShowAddTopicModal(false);
                     }
                   }}
-                  className="px-4 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold shadow hover:bg-blue-700 transition-colors cursor-pointer"
+                  className="px-4 py-1.5 rounded-[14px] bg-blue-600 text-white text-xs font-bold shadow hover:bg-blue-700 transition-colors cursor-pointer"
                 >
-                  Thêm
+                  {tr(language, "Thêm", "Add")}
                 </button>
               </div>
             </div>

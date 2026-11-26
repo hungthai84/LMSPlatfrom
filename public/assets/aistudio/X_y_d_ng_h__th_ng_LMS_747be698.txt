@@ -1,0 +1,1953 @@
+# MASTER PROMPT – XÂY DỰNG EDU LMS
+## LEARNING MANAGEMENT SYSTEM – ENTERPRISE AI-NATIVE PLATFORM
+
+### 1. VAI TRÒ VÀ NHIỆM VỤ
+
+Bạn là một đội ngũ chuyên gia cấp cao bao gồm:
+
+- Product Manager chuyên phát triển hệ thống LMS.
+- Business Analyst chuyên phân tích nghiệp vụ đào tạo.
+- Enterprise Solution Architect.
+- UI/UX Designer chuyên thiết kế SaaS Dashboard.
+- Senior Frontend Developer.
+- Senior Backend Developer.
+- Database Architect.
+- AI Engineer chuyên Gemini API, RAG và AI Agents.
+- QA Engineer chuyên kiểm thử hệ thống.
+
+Nhiệm vụ: Phân tích, thiết kế và xây dựng một website app LMS hoàn chỉnh, hiện đại, có khả năng vận hành thực tế, đáp ứng cả nhu cầu đào tạo trực tuyến, đào tạo trực tiếp và đào tạo kết hợp.
+
+**Tên sản phẩm:** EDU LMS.
+
+**Tên đầy đủ:** Learning Management System.
+
+**Tên tiếng Việt:** Hệ thống quản lý đào tạo và học tập trực tuyến.
+
+**Định hướng:** Enterprise LMS + Training Management System + AI Learning Platform.
+
+Không xây dựng một landing page đơn giản hoặc một dashboard chỉ mang tính minh họa. Hãy xây dựng một ứng dụng quản trị đào tạo có đầy đủ giao diện, dữ liệu, nghiệp vụ, chức năng tương tác, phân quyền và kiến trúc backend.
+
+---
+
+# 2. MỤC TIÊU SẢN PHẨM
+
+Xây dựng một nền tảng tập trung để quản lý toàn bộ vòng đời đào tạo:
+
+1. Quản lý tổ chức, phòng ban và nhân sự.
+2. Quản lý tài khoản học viên và giảng viên.
+3. Quản lý khóa học và chương trình đào tạo.
+4. Xây dựng nội dung bài giảng.
+5. Quản lý thư viện học liệu.
+6. Quản lý lớp học và lịch giảng dạy.
+7. Quản lý đăng ký và ghi danh khóa học.
+8. Tổ chức học trực tuyến và học trực tiếp.
+9. Giao bài tập, kiểm tra và thi trực tuyến.
+10. Quản lý bảng điểm và kết quả học tập.
+11. Theo dõi tiến độ và thời gian học.
+12. Cấp chứng chỉ và huy hiệu.
+13. Quản lý tương tác giữa giảng viên và học viên.
+14. Quản lý cộng đồng học tập.
+15. Xây dựng lộ trình và khung năng lực.
+16. Quản lý kế hoạch đào tạo doanh nghiệp.
+17. Báo cáo và phân tích dữ liệu.
+18. Trợ lý AI và tự động hóa đào tạo.
+19. Quản lý thương mại và thanh toán khóa học.
+20. Kết nối các nền tảng bên ngoài.
+21. Quản trị toàn bộ hệ thống.
+22. Hỗ trợ Mobile Learning.
+23. Gamification.
+24. Accessibility.
+25. Security & Compliance.
+26. Quản lý dữ liệu, giám sát và vận hành.
+
+Hệ thống phải hỗ trợ nhiều đơn vị, phòng ban, nhóm đào tạo, chương trình học và số lượng lớn người dùng.
+
+---
+
+# 3. ĐỐI TƯỢNG SỬ DỤNG VÀ PHÂN QUYỀN
+
+Thiết kế hệ thống phân quyền theo RBAC – Role-Based Access Control.
+
+## 3.1. Các vai trò chính
+
+**01. Super Admin – Quản trị tối cao**
+- Toàn quyền hệ thống.
+- Quản lý tất cả tổ chức.
+- Quản lý tài khoản và phân quyền.
+- Xem toàn bộ báo cáo.
+- Cấu hình hệ thống.
+- Quản lý tích hợp và bảo mật.
+
+**02. System Admin – Quản trị hệ thống**
+- Cấu hình nền tảng.
+- Quản lý danh mục.
+- Quản lý tài khoản.
+- Quản lý giao diện.
+- Theo dõi hệ thống.
+- Quản lý nhật ký và sao lưu.
+
+**03. Training Director – Giám đốc đào tạo**
+- Quản lý chiến lược đào tạo.
+- Quản lý kế hoạch năm/quý/tháng.
+- Theo dõi ngân sách.
+- Quản lý chương trình đào tạo.
+- Theo dõi KPI và hiệu quả đào tạo.
+
+**04. Training Manager – Quản lý đào tạo**
+- Tạo và quản lý khóa học.
+- Quản lý lớp học.
+- Phân công giảng viên.
+- Ghi danh học viên.
+- Phê duyệt kế hoạch đào tạo.
+- Theo dõi tiến độ.
+- Lập báo cáo.
+
+**05. Organization Admin – Quản trị đơn vị**
+- Quản lý dữ liệu đơn vị.
+- Quản lý phòng ban.
+- Quản lý nhân sự trong phạm vi được giao.
+- Theo dõi chương trình đào tạo của đơn vị.
+
+**06. Department Manager – Trưởng phòng**
+- Xem danh sách nhân viên.
+- Đề xuất nhu cầu đào tạo.
+- Đăng ký khóa học cho nhân viên.
+- Phê duyệt đăng ký theo thẩm quyền.
+- Theo dõi kết quả nhân viên.
+
+**07. Instructor – Giảng viên**
+- Quản lý khóa học được phân công.
+- Tạo nội dung bài giảng.
+- Quản lý bài tập.
+- Tạo bài thi.
+- Điểm danh.
+- Chấm điểm.
+- Phản hồi học viên.
+- Xem báo cáo lớp phụ trách.
+
+**08. Teaching Assistant – Trợ giảng**
+- Hỗ trợ học viên.
+- Quản lý thảo luận.
+- Hỗ trợ kiểm tra.
+- Theo dõi hoạt động lớp.
+- Hỗ trợ giảng viên.
+
+**09. Evaluator – Người đánh giá**
+- Xem bài làm được giao.
+- Chấm bài.
+- Đánh giá theo Rubric.
+- Ghi nhận nhận xét.
+- Phúc khảo theo quyền.
+
+**10. Learner – Học viên**
+- Đăng ký khóa học.
+- Xem khóa học của tôi.
+- Học video và tài liệu.
+- Làm bài tập.
+- Thi trực tuyến.
+- Xem kết quả.
+- Nhận chứng chỉ.
+- Trao đổi với giảng viên.
+- Theo dõi thành tích.
+
+**11. Auditor – Kiểm tra viên**
+- Xem dữ liệu được cấp phép.
+- Kiểm tra lịch sử.
+- Theo dõi quy trình.
+- Trích xuất báo cáo kiểm tra.
+- Không được sửa dữ liệu nghiệp vụ.
+
+**12. Parent / Guardian – Người giám hộ**
+- Theo dõi tiến độ học tập.
+- Xem kết quả được cho phép.
+- Nhận thông báo.
+- Không được truy cập dữ liệu cá nhân không thuộc phạm vi.
+
+## 3.2. Yêu cầu phân quyền
+
+Phải hỗ trợ:
+
+- Phân quyền theo vai trò.
+- Phân quyền theo module.
+- Phân quyền theo hành động: View, Create, Edit, Delete, Approve, Export.
+- Phân quyền theo tổ chức.
+- Phân quyền theo phòng ban.
+- Phân quyền theo khóa học.
+- Phân quyền theo lớp học.
+- Phân quyền theo dữ liệu cá nhân.
+- Phân quyền kế thừa có kiểm soát.
+- Gán nhiều vai trò cho một tài khoản.
+- Nhật ký cấp và thu hồi quyền.
+
+Không được chỉ ẩn nút trên giao diện. Mọi quyền truy cập dữ liệu và thao tác nhạy cảm phải được kiểm tra ở backend và Firestore Security Rules.
+
+---
+
+# 4. CẤU TRÚC MENU VÀ SIDEBAR TOÀN HỆ THỐNG
+
+Xây dựng sidebar dạng nhóm module có thể thu gọn/mở rộng.
+
+Mặc định hiển thị tiếng Việt, có thể chuyển đổi tiếng Anh.
+
+## NHÓM 01 – TỔNG QUAN
+
+- Dashboard.
+- Thống kê đào tạo.
+- Hoạt động gần đây.
+- Lịch đào tạo.
+- Thông báo hệ thống.
+- Công việc cần xử lý.
+- Cảnh báo đào tạo.
+
+## NHÓM 02 – QUẢN LÝ ĐÀO TẠO
+
+- Khóa học.
+- Chương trình đào tạo.
+- Danh mục khóa học.
+- Lộ trình học tập.
+- Kế hoạch đào tạo.
+- Nhu cầu đào tạo.
+- Lớp học.
+- Chương trình hội nhập.
+- Đào tạo bắt buộc.
+- Đào tạo định kỳ.
+
+## NHÓM 03 – NỘI DUNG HỌC TẬP
+
+- Course Builder.
+- Chương học.
+- Bài học.
+- Thư viện học liệu.
+- Video bài giảng.
+- Tài liệu đào tạo.
+- Ebook.
+- Bài giảng tương tác.
+- SCORM / xAPI / cmi5.
+- Lịch sử phiên bản.
+
+## NHÓM 04 – NGƯỜI DÙNG
+
+- Danh sách học viên.
+- Giảng viên.
+- Trợ giảng.
+- Quản lý đào tạo.
+- Nhân viên.
+- Phòng ban.
+- Đơn vị.
+- Nhóm người dùng.
+- Hồ sơ năng lực.
+- Import / Export người dùng.
+
+## NHÓM 05 – QUẢN LÝ LỚP HỌC
+
+- Danh sách lớp.
+- Lịch học.
+- Lịch giảng viên.
+- Phòng học.
+- Lớp trực tuyến.
+- Điểm danh.
+- Danh sách học viên.
+- Video buổi học.
+
+## NHÓM 06 – ĐĂNG KÝ VÀ GHI DANH
+
+- Đăng ký khóa học.
+- Ghi danh học viên.
+- Yêu cầu phê duyệt.
+- Danh sách chờ.
+- Chuyển lớp.
+- Hủy đăng ký.
+- Lịch sử ghi danh.
+
+## NHÓM 07 – KIỂM TRA VÀ ĐÁNH GIÁ
+
+- Ngân hàng câu hỏi.
+- Đề thi.
+- Bài kiểm tra.
+- Bài tập.
+- Bài thực hành.
+- Bài nộp.
+- Chấm điểm.
+- Bảng điểm.
+- Phúc khảo.
+- Giám sát thi.
+- Lịch sử thi.
+
+## NHÓM 08 – CHỨNG CHỈ VÀ THÀNH TÍCH
+
+- Mẫu chứng chỉ.
+- Cấp chứng chỉ.
+- Tra cứu chứng chỉ.
+- Huy hiệu.
+- Bảng thành tích.
+- Lịch sử chứng nhận.
+- Thu hồi chứng chỉ.
+
+## NHÓM 09 – TƯƠNG TÁC VÀ CỘNG ĐỒNG
+
+- Thông báo.
+- Tin nhắn.
+- Chat.
+- Diễn đàn.
+- Thảo luận.
+- Hỏi đáp.
+- Cộng đồng học tập.
+- Nhóm học tập.
+- Chia sẻ tài liệu.
+
+## NHÓM 10 – AI LEARNING
+
+- AI Learning Assistant.
+- AI Tutor.
+- AI Course Creator.
+- AI Lesson Generator.
+- AI Quiz Generator.
+- AI Knowledge Search.
+- AI Content Summary.
+- AI Translation.
+- AI Learning Path.
+- AI Analytics.
+- AI Agent Center.
+- AI Conversation History.
+
+## NHÓM 11 – BÁO CÁO VÀ PHÂN TÍCH
+
+- Báo cáo tổng quan.
+- Báo cáo khóa học.
+- Báo cáo học viên.
+- Báo cáo giảng viên.
+- Báo cáo lớp học.
+- Báo cáo tiến độ.
+- Báo cáo kết quả thi.
+- Báo cáo chứng chỉ.
+- Báo cáo chi phí.
+- Báo cáo KPI.
+- Báo cáo hiệu quả đào tạo.
+- Báo cáo tùy chỉnh.
+
+## NHÓM 12 – THƯƠNG MẠI ĐÀO TẠO
+
+- Danh mục bán khóa học.
+- Đơn hàng.
+- Thanh toán.
+- Học phí.
+- Gói thành viên.
+- Mã giảm giá.
+- Khuyến mãi.
+- Hoàn tiền.
+- Doanh thu.
+- Hoa hồng giảng viên.
+- Affiliate.
+
+## NHÓM 13 – TÍCH HỢP HỆ THỐNG
+
+- API Management.
+- Webhooks.
+- Google Workspace.
+- Microsoft 365.
+- Zoom.
+- Google Meet.
+- Microsoft Teams.
+- CRM.
+- HRM / HRIS.
+- ERP.
+- SSO.
+- SCORM.
+- xAPI / LRS.
+- LTI 1.3.
+- QTI.
+- OneRoster.
+- Open Badges.
+
+## NHÓM 14 – HỆ THỐNG
+
+- Dashboard hệ thống.
+- Quản lý tài khoản.
+- Vai trò và phân quyền.
+- Cấu hình tổ chức.
+- Cấu hình giao diện.
+- Cấu hình ngôn ngữ.
+- Cấu hình email.
+- Cấu hình thông báo.
+- Quản lý file.
+- Quản lý dung lượng.
+- Quản lý API.
+- Nhật ký hoạt động.
+- Nhật ký bảo mật.
+- Sao lưu dữ liệu.
+- Phục hồi dữ liệu.
+- Cấu hình AI.
+- Quản lý tích hợp.
+
+---
+
+# 5. CHI TIẾT CÁC MODULE CHỨC NĂNG
+
+## 5.1. DASHBOARD – BẢNG ĐIỀU KHIỂN
+
+Xây dựng dashboard chuyên nghiệp, hiển thị dữ liệu theo thời gian thực hoặc theo lần cập nhật gần nhất.
+
+### Thẻ thống kê tổng quan
+
+- Tổng số khóa học.
+- Khóa học đang hoạt động.
+- Tổng học viên.
+- Học viên đang học.
+- Tổng giảng viên.
+- Tổng lớp học.
+- Khóa học đã hoàn thành.
+- Chứng chỉ đã cấp.
+- Tỷ lệ hoàn thành.
+- Tỷ lệ đạt.
+
+### Biểu đồ
+
+- Số lượng học viên theo thời gian.
+- Số khóa học theo danh mục.
+- Tỷ lệ hoàn thành học tập.
+- Tỷ lệ đạt và không đạt.
+- Hoạt động học tập theo ngày.
+- Top khóa học phổ biến.
+- Top giảng viên.
+- Phân bố học viên theo phòng ban.
+- Chi phí đào tạo theo tháng.
+- Hiệu quả đào tạo theo đơn vị.
+
+### Widget bổ sung
+
+- Lịch đào tạo.
+- Hoạt động gần đây.
+- Khóa học mới.
+- Lớp học sắp diễn ra.
+- Công việc đang chờ phê duyệt.
+- Học viên chưa hoàn thành.
+- Học viên có nguy cơ bỏ học.
+- Cảnh báo khóa học sắp hết hạn.
+- Nhiệm vụ cần xử lý.
+
+### Bộ lọc
+
+- Hôm nay.
+- 7 ngày.
+- 30 ngày.
+- Tháng.
+- Quý.
+- Năm.
+- Tùy chọn khoảng thời gian.
+- Đơn vị.
+- Phòng ban.
+- Khóa học.
+- Giảng viên.
+
+Mỗi vai trò phải có dashboard phù hợp với quyền và nhu cầu sử dụng.
+
+## 5.2. USER MANAGEMENT – QUẢN LÝ NGƯỜI DÙNG
+
+Xây dựng bảng dữ liệu người dùng chuyên nghiệp.
+
+Các trường:
+
+- Mã người dùng.
+- Ảnh đại diện.
+- Họ và tên.
+- Email.
+- Số điện thoại.
+- Mã nhân viên / mã học viên.
+- Đơn vị.
+- Phòng ban.
+- Chức danh.
+- Vai trò.
+- Ngày tham gia.
+- Trạng thái.
+- Khóa học đang tham gia.
+- Tình trạng đào tạo.
+
+Chức năng:
+
+- Tạo tài khoản.
+- Sửa thông tin.
+- Xóa hoặc lưu trữ tài khoản.
+- Kích hoạt / khóa.
+- Import Excel / CSV.
+- Export Excel / CSV.
+- Tìm kiếm.
+- Lọc nâng cao.
+- Phân trang.
+- Chọn nhiều tài khoản.
+- Gán vai trò hàng loạt.
+- Gán khóa học hàng loạt.
+- Gửi lời mời qua email.
+- Reset mật khẩu.
+- Xem hồ sơ chi tiết.
+- Xem lịch sử hoạt động.
+- Xem lịch sử đào tạo.
+
+Không lưu mật khẩu dạng văn bản thuần.
+
+## 5.3. COURSE MANAGEMENT – QUẢN LÝ KHÓA HỌC
+
+Mỗi khóa học có:
+
+- Mã khóa học.
+- Tên khóa học.
+- Danh mục.
+- Hình ảnh đại diện.
+- Banner.
+- Mô tả ngắn.
+- Mô tả chi tiết.
+- Mục tiêu học tập.
+- Đối tượng học.
+- Điều kiện đầu vào.
+- Cấp độ.
+- Thời lượng.
+- Ngôn ngữ.
+- Giảng viên.
+- Trợ giảng.
+- Học phí.
+- Ngày bắt đầu.
+- Ngày kết thúc.
+- Số lượng học viên tối đa.
+- Điều kiện hoàn thành.
+- Điểm đạt.
+- Chứng chỉ liên quan.
+- Trạng thái.
+
+Trạng thái:
+
+- Draft – Bản nháp.
+- Pending – Chờ duyệt.
+- Published – Đã xuất bản.
+- Active – Đang hoạt động.
+- Completed – Đã hoàn thành.
+- Archived – Lưu trữ.
+
+Chức năng:
+
+- Tạo khóa học.
+- Chỉnh sửa.
+- Nhân bản.
+- Xóa.
+- Xuất bản.
+- Gỡ xuất bản.
+- Phê duyệt.
+- Quản lý giảng viên.
+- Quản lý học viên.
+- Quản lý lịch học.
+- Thiết lập điều kiện hoàn thành.
+- Quản lý phiên bản.
+- Đánh giá khóa học.
+- Xem thống kê.
+
+## 5.4. COURSE BUILDER – XÂY DỰNG BÀI GIẢNG
+
+Xây dựng công cụ tạo khóa học theo cấu trúc phân cấp:
+
+Khóa học → Chương → Bài học → Hoạt động học tập.
+
+Hỗ trợ:
+
+- Tạo chương.
+- Tạo bài học.
+- Sắp xếp bằng kéo thả.
+- Soạn nội dung văn bản.
+- Chèn hình ảnh.
+- Chèn video.
+- Chèn âm thanh.
+- Upload PDF.
+- Upload PPT.
+- Upload DOC / DOCX.
+- Upload XLS / XLSX.
+- Nhúng video bên ngoài.
+- Tạo câu hỏi tương tác.
+- Tạo bài tập.
+- Tạo bài kiểm tra.
+- Chèn nội dung SCORM.
+- Lưu tự động.
+- Xem trước.
+- Quản lý phiên bản.
+- Phê duyệt nội dung.
+- Xuất bản bài giảng.
+
+Mỗi bài học cần hỗ trợ:
+
+- Mục tiêu bài học.
+- Nội dung.
+- Thời lượng dự kiến.
+- Tài nguyên đính kèm.
+- Điều kiện hoàn thành.
+- Bài học tiên quyết.
+- Bài kiểm tra sau bài học.
+- Ghi chú giảng viên.
+
+## 5.5. LEARNING CONTENT – THƯ VIỆN HỌC LIỆU
+
+Tạo hệ thống quản lý tài nguyên trung tâm.
+
+Danh mục:
+
+- Video.
+- Hình ảnh.
+- PDF.
+- Word.
+- Excel.
+- PowerPoint.
+- Ebook.
+- Audio.
+- Slide.
+- File nén.
+- Tài nguyên bên ngoài.
+
+Chức năng:
+
+- Upload nhiều file.
+- Kéo thả file.
+- Preview.
+- Tìm kiếm.
+- Phân loại.
+- Gắn thẻ.
+- Đổi tên.
+- Di chuyển thư mục.
+- Xóa.
+- Tải xuống.
+- Phân quyền truy cập.
+- Kiểm tra dung lượng.
+- Xem lịch sử sử dụng.
+
+Có giới hạn loại file, dung lượng và kiểm tra file tải lên.
+
+## 5.6. ENROLLMENT – ĐĂNG KÝ VÀ GHI DANH
+
+Xây dựng quy trình:
+
+Học viên đăng ký → Quản lý xem xét → Phê duyệt → Ghi danh → Gửi thông báo → Bắt đầu học.
+
+Hỗ trợ:
+
+- Học viên tự đăng ký.
+- Quản trị viên ghi danh.
+- Ghi danh hàng loạt.
+- Ghi danh theo phòng ban.
+- Ghi danh theo nhóm.
+- Ghi danh theo lộ trình.
+- Đăng ký cần phê duyệt.
+- Danh sách chờ.
+- Giới hạn số lượng.
+- Điều kiện tiên quyết.
+- Hủy đăng ký.
+- Chuyển lớp.
+- Lịch sử ghi danh.
+- Thông báo tự động.
+
+## 5.7. LEARNING EXPERIENCE – GIAO DIỆN HỌC VIÊN
+
+Tạo trang học tập cá nhân riêng.
+
+Các trang:
+
+- My Learning – Học tập của tôi.
+- My Courses – Khóa học của tôi.
+- Continue Learning – Tiếp tục học.
+- Recommended Courses – Khóa học đề xuất.
+- Learning Calendar – Lịch học.
+- My Assignments – Bài tập của tôi.
+- My Exams – Bài thi.
+- My Grades – Bảng điểm.
+- My Certificates – Chứng chỉ.
+- My Achievements – Thành tích.
+
+### Video Player
+
+- Phát / tạm dừng.
+- Điều chỉnh âm lượng.
+- Điều chỉnh tốc độ.
+- Toàn màn hình.
+- Phụ đề.
+- Transcript.
+- Picture-in-Picture.
+- Nhớ vị trí đã xem.
+- Tự động tiếp tục học.
+- Đánh dấu bài học hoàn thành.
+
+### Trải nghiệm học tập
+
+- Ghi chú cá nhân.
+- Bookmark.
+- Download tài liệu được cấp phép.
+- Bình luận bài học.
+- Hỏi đáp.
+- Đánh dấu nội dung quan trọng.
+- Theo dõi % tiến độ.
+- Lưu trạng thái học.
+- Học trên nhiều thiết bị.
+- Đồng bộ dữ liệu.
+
+## 5.8. VIRTUAL CLASSROOM – LỚP HỌC TRỰC TUYẾN
+
+Chức năng:
+
+- Tạo phòng học.
+- Lên lịch học.
+- Mời học viên.
+- Mời giảng viên.
+- Điểm danh.
+- Chat.
+- Video Conference.
+- Chia sẻ màn hình.
+- Chia sẻ tài liệu.
+- Bảng trắng.
+- Giơ tay.
+- Chia nhóm.
+- Khảo sát.
+- Ghi hình.
+- Lưu video buổi học.
+- Báo cáo tham gia.
+
+Hỗ trợ kiến trúc tích hợp Zoom, Google Meet, Microsoft Teams và BigBlueButton.
+
+Nếu chưa được cấp API hoặc thông tin xác thực, phải hiển thị trạng thái chưa cấu hình và hướng dẫn kết nối; không giả lập cuộc họp đã hoạt động.
+
+## 5.9. ASSESSMENT – KIỂM TRA VÀ THI
+
+### Ngân hàng câu hỏi
+
+Hỗ trợ:
+
+- Trắc nghiệm một đáp án.
+- Trắc nghiệm nhiều đáp án.
+- Đúng / Sai.
+- Điền từ.
+- Tự luận.
+- Ghép cặp.
+- Sắp xếp.
+- Câu hỏi hình ảnh.
+- Câu hỏi âm thanh.
+- Câu hỏi video.
+- Bài tập lập trình.
+- Bài thực hành.
+- Nộp file.
+- Khảo sát.
+
+### Quản lý đề thi
+
+- Tạo đề thi.
+- Tạo từ ngân hàng câu hỏi.
+- Sinh đề ngẫu nhiên.
+- Trộn câu hỏi.
+- Trộn đáp án.
+- Thiết lập thời gian.
+- Số lần thi.
+- Điểm đạt.
+- Trọng số câu hỏi.
+- Điều kiện mở đề.
+- Thời hạn thi.
+- Tự động lưu bài.
+- Nộp bài.
+- Tự động chấm điểm.
+- Chấm thủ công.
+- Phúc khảo.
+- Xuất kết quả.
+
+### Giám sát thi
+
+Có thể thiết kế tùy chọn:
+
+- Xác minh danh tính.
+- Webcam Monitoring.
+- Ghi nhận chuyển tab.
+- Browser Lockdown.
+- Cảnh báo hành vi bất thường.
+
+Các chức năng giám sát phải được bật theo chính sách, công khai việc thu thập dữ liệu và giới hạn lưu trữ dữ liệu cá nhân. Không tự động kết luận gian lận chỉ dựa vào một tín hiệu giám sát.
+
+## 5.10. GRADEBOOK – QUẢN LÝ ĐIỂM
+
+- Điểm bài tập.
+- Điểm bài kiểm tra.
+- Điểm cuối kỳ.
+- Điểm chuyên cần.
+- Điểm thực hành.
+- Trọng số.
+- Điểm trung bình.
+- Xếp loại.
+- Đạt / không đạt.
+- Nhận xét.
+- Phúc khảo.
+- Lịch sử chỉnh sửa.
+- Xuất bảng điểm.
+
+Có thể cấu hình công thức tính điểm theo từng khóa học.
+
+## 5.11. PROGRESS TRACKING – THEO DÕI TIẾN ĐỘ
+
+Theo dõi các chỉ số:
+
+- % hoàn thành khóa học.
+- % hoàn thành bài học.
+- Tổng thời gian học.
+- Thời gian xem video.
+- Số lần đăng nhập.
+- Ngày hoạt động gần nhất.
+- Điểm trung bình.
+- Số bài tập đã nộp.
+- Tỷ lệ chuyên cần.
+- Tỷ lệ hoàn thành đúng hạn.
+- Số chứng chỉ đã nhận.
+
+Cảnh báo:
+
+- Không bắt đầu khóa học.
+- Không hoạt động nhiều ngày.
+- Không hoàn thành đúng hạn.
+- Điểm học tập thấp.
+- Nguy cơ bỏ học.
+- Chưa tham gia bài thi.
+
+## 5.12. CERTIFICATE & ACHIEVEMENT – CHỨNG CHỈ
+
+- Tạo mẫu chứng chỉ.
+- Thiết kế chứng chỉ.
+- Tạo file PDF.
+- Cấp chứng chỉ tự động.
+- Cấp chứng chỉ thủ công.
+- Mã định danh duy nhất.
+- QR Code.
+- Ngày cấp.
+- Ngày hết hạn.
+- Gia hạn.
+- Thu hồi.
+- Tra cứu.
+- Xác minh online.
+- Huy hiệu thành tích.
+- Lịch sử chứng chỉ.
+
+Không cho phép học viên nhận chứng chỉ khi chưa đạt các điều kiện được cấu hình.
+
+## 5.13. COMMUNICATION – GIAO TIẾP
+
+- Thông báo hệ thống.
+- Tin nhắn nội bộ.
+- Chat giảng viên – học viên.
+- Chat nhóm.
+- Email.
+- Push Notification.
+- SMS qua nhà cung cấp tích hợp.
+- Nhắc lịch học.
+- Nhắc hạn bài tập.
+- Nhắc lịch thi.
+- Thông báo điểm.
+- Thông báo chứng chỉ.
+
+Có thể thiết lập mẫu nội dung, nhóm nhận và lịch gửi thông báo.
+
+## 5.14. COMMUNITY – CỘNG ĐỒNG HỌC TẬP
+
+- Diễn đàn.
+- Nhóm học tập.
+- Thảo luận.
+- Câu hỏi và trả lời.
+- Đánh giá bài viết.
+- Bình luận.
+- Chia sẻ tài liệu.
+- Tìm kiếm thảo luận.
+- Báo cáo nội dung.
+- Quản trị viên kiểm duyệt.
+
+## 5.15. LEARNING PATH & COMPETENCY – LỘ TRÌNH VÀ NĂNG LỰC
+
+- Tạo lộ trình học tập.
+- Lộ trình theo cá nhân.
+- Lộ trình theo chức danh.
+- Lộ trình theo phòng ban.
+- Lộ trình bắt buộc.
+- Lộ trình tự chọn.
+- Ma trận kỹ năng.
+- Khung năng lực.
+- Đánh giá đầu vào.
+- Đánh giá đầu ra.
+- Phân tích Skill Gap.
+- Đề xuất khóa học.
+- Kế hoạch phát triển cá nhân IDP.
+- Theo dõi sự tiến bộ.
+
+## 5.16. TRAINING MANAGEMENT – QUẢN LÝ ĐÀO TẠO DOANH NGHIỆP
+
+- Quản lý tổ chức.
+- Quản lý chi nhánh.
+- Quản lý phòng ban.
+- Quản lý nhân sự.
+- Kế hoạch đào tạo năm.
+- Kế hoạch đào tạo quý.
+- Kế hoạch đào tạo tháng.
+- Phân tích nhu cầu đào tạo.
+- Đào tạo hội nhập.
+- Đào tạo nghiệp vụ.
+- Đào tạo bắt buộc.
+- Đào tạo định kỳ.
+- Phân công giảng viên.
+- Phòng học.
+- Ngân sách.
+- Chi phí.
+- Phê duyệt đào tạo.
+- Đánh giá sau đào tạo.
+- Training ROI.
+
+Thiết lập luồng phê duyệt nhiều cấp theo từng tổ chức.
+
+## 5.17. ANALYTICS & REPORTING – BÁO CÁO
+
+Tạo trung tâm báo cáo tập trung.
+
+### Báo cáo tổng quan
+
+- Tổng người dùng.
+- Tổng khóa học.
+- Tổng lớp học.
+- Tổng lượt đăng ký.
+- Tổng số giờ học.
+- Tỷ lệ hoàn thành.
+- Tỷ lệ đạt.
+
+### Báo cáo học viên
+
+- Tiến độ từng học viên.
+- Điểm số.
+- Thời lượng học.
+- Chuyên cần.
+- Khóa học đã hoàn thành.
+- Chứng chỉ đã nhận.
+
+### Báo cáo giảng viên
+
+- Số lớp giảng dạy.
+- Số học viên.
+- Số giờ giảng.
+- Tỷ lệ hoàn thành.
+- Kết quả học viên.
+- Đánh giá giảng viên.
+
+### Báo cáo đào tạo
+
+- Chi phí đào tạo.
+- Ngân sách.
+- Kết quả theo phòng ban.
+- Hiệu quả khóa học.
+- Hiệu quả đào tạo.
+- Training ROI.
+
+### Công cụ báo cáo
+
+- Biểu đồ đường.
+- Biểu đồ cột.
+- Biểu đồ tròn.
+- Bảng dữ liệu.
+- Bộ lọc.
+- Drill-down.
+- Export CSV.
+- Export Excel.
+- Export PDF.
+- Lên lịch báo cáo.
+- Báo cáo tự động qua email.
+
+Tất cả báo cáo phải lấy từ dữ liệu thực tế của hệ thống, có thời gian cập nhật và phạm vi dữ liệu rõ ràng.
+
+## 5.18. AI LEARNING – TRÍ TUỆ NHÂN TẠO
+
+Sử dụng Gemini API theo kiến trúc server-side.
+
+### AI Tutor
+
+- Hỏi đáp kiến thức.
+- Giải thích bài học.
+- Đưa ra ví dụ.
+- Hướng dẫn giải bài tập.
+- Gợi ý tài liệu.
+- Hỗ trợ học viên theo cấp độ.
+
+### AI Learning Assistant
+
+- Trợ lý học tập.
+- Hướng dẫn sử dụng LMS.
+- Tra cứu khóa học.
+- Giải thích quy trình học.
+- Theo dõi câu hỏi thường gặp.
+
+### AI Course Creator
+
+- Tạo đề cương khóa học.
+- Xây dựng mục tiêu.
+- Sinh cấu trúc chương.
+- Viết nội dung bài học.
+- Tạo tài liệu nháp.
+- Gợi ý hoạt động tương tác.
+
+### AI Quiz Generator
+
+- Tạo câu hỏi từ văn bản.
+- Tạo câu hỏi từ PDF.
+- Tạo câu hỏi từ bài học.
+- Tạo câu trắc nghiệm.
+- Tạo đáp án.
+- Giải thích đáp án.
+- Đề xuất độ khó.
+- Đưa câu hỏi vào ngân hàng sau khi giảng viên duyệt.
+
+### AI Content Assistant
+
+- Tóm tắt tài liệu.
+- Tạo outline.
+- Dịch nội dung.
+- Viết phụ đề.
+- Chuyển giọng nói thành văn bản.
+- Chuyển văn bản thành giọng nói.
+- Tóm tắt video từ transcript có sẵn.
+
+### AI Recommendation
+
+- Đề xuất khóa học.
+- Đề xuất lộ trình.
+- Gợi ý kỹ năng.
+- Phân tích khoảng cách năng lực.
+- Cá nhân hóa việc học.
+
+### AI Learning Analytics
+
+- Phân tích hành vi.
+- Phát hiện nguy cơ không hoàn thành.
+- Gợi ý hỗ trợ học viên.
+- Tổng hợp kết quả.
+- Phân tích xu hướng đào tạo.
+
+### AI Agent Center
+
+Tạo các Agent chuyên biệt:
+
+1. Learning Agent.
+2. Instructor Agent.
+3. Course Creator Agent.
+4. Quiz Generator Agent.
+5. Training Manager Agent.
+6. Knowledge Agent.
+7. Learning Analytics Agent.
+8. Student Support Agent.
+
+### AI Knowledge Base / RAG
+
+- Cho phép tải tài liệu được cấp phép.
+- Phân đoạn nội dung.
+- Lập chỉ mục.
+- Tìm kiếm ngữ nghĩa.
+- Trả lời dựa trên tài liệu nguồn.
+- Hiển thị nguồn tham khảo.
+- Không truy cập dữ liệu người dùng ngoài quyền.
+- Không sử dụng tài liệu riêng tư của lớp khác khi chưa được cấp quyền.
+
+Nội dung do AI sinh ra phải ở trạng thái nháp, chờ con người kiểm duyệt trước khi xuất bản hoặc sử dụng để chấm điểm chính thức.
+
+Quản lý lịch sử hội thoại, mức sử dụng AI, hạn mức và lỗi API. Không để lộ API Key phía trình duyệt.
+
+## 5.19. PAYMENT & E-COMMERCE
+
+Thiết kế module tùy chọn để kinh doanh khóa học:
+
+- Danh mục khóa học trả phí.
+- Giá khóa học.
+- Giỏ hàng.
+- Đơn hàng.
+- Thanh toán.
+- Học phí.
+- Mã giảm giá.
+- Coupon.
+- Gói thành viên.
+- Subscription.
+- Hoàn tiền.
+- Hóa đơn.
+- Báo cáo doanh thu.
+- Hoa hồng giảng viên.
+- Affiliate.
+
+Chỉ xác nhận đơn hàng khi backend nhận được kết quả thanh toán hợp lệ từ nhà cung cấp hoặc webhook đã xác thực. Không tự tạo giao dịch thành công giả.
+
+## 5.20. INTEGRATION – TÍCH HỢP
+
+Thiết kế Integration Center để quản lý:
+
+- Google Workspace.
+- Google Drive.
+- Google Calendar.
+- Microsoft 365.
+- OneDrive.
+- Zoom.
+- Google Meet.
+- Microsoft Teams.
+- CRM.
+- HRM / HRIS.
+- ERP.
+- SSO.
+- Payment Gateway.
+- Email API.
+- Cloud Storage.
+- Gemini API.
+
+### Chuẩn LMS
+
+- SCORM 1.2.
+- SCORM 2004.
+- xAPI.
+- cmi5.
+- LTI 1.3.
+- QTI.
+- OneRoster.
+- Open Badges.
+- Caliper Analytics.
+
+Mỗi tích hợp cần có:
+
+- Trạng thái kết nối.
+- Tên dịch vụ.
+- Endpoint.
+- Cấu hình.
+- Kiểm tra kết nối.
+- Nhật ký đồng bộ.
+- Lịch đồng bộ.
+- Xử lý lỗi.
+- Hướng dẫn cấu hình.
+
+Không giả định đã hoàn tất tích hợp khi chưa có thông tin xác thực, cấu hình và kiểm thử thực tế. Đối với tiêu chuẩn phức tạp, phải xây dựng adapter theo từng chuẩn và báo cáo rõ mức hỗ trợ thực tế.
+
+## 5.21. SYSTEM ADMINISTRATION
+
+- Cấu hình hệ thống.
+- Logo.
+- Tên nền tảng.
+- Thông tin tổ chức.
+- Ngôn ngữ.
+- Múi giờ.
+- Cấu hình email.
+- Cấu hình thông báo.
+- Cấu hình AI.
+- API Settings.
+- Storage Settings.
+- Quản lý file.
+- Quản lý dung lượng.
+- Nhật ký.
+- Audit Log.
+- Backup.
+- Restore.
+- System Monitoring.
+- Error Monitoring.
+- Cấu hình bảo mật.
+
+## 5.22. MOBILE LEARNING
+
+Thiết kế responsive hoàn chỉnh:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Smartphone.
+
+Hỗ trợ giao diện học tập trên mobile, đồng bộ tiến độ, video, tài liệu và thông báo.
+
+Chỉ quảng bá khả năng học offline sau khi đã triển khai lưu trữ cục bộ, đồng bộ và xử lý xung đột dữ liệu thực tế.
+
+## 5.23. GAMIFICATION
+
+- Điểm thưởng.
+- Huy hiệu.
+- Level.
+- Streak.
+- Leaderboard.
+- Achievement.
+- Nhiệm vụ.
+- Thử thách.
+- Phần thưởng.
+- Thành tích cá nhân.
+- Thành tích nhóm.
+
+## 5.24. ACCESSIBILITY
+
+- Điều hướng bằng bàn phím.
+- Hỗ trợ screen reader.
+- Alt text.
+- Phụ đề video.
+- Tương phản màu.
+- Điều chỉnh kích thước chữ.
+- Focus state rõ ràng.
+- Không sử dụng màu sắc làm tín hiệu duy nhất.
+- Hạn chế hoạt ảnh khi người dùng yêu cầu giảm chuyển động.
+
+Mục tiêu thiết kế hướng tới WCAG 2.2 AA.
+
+## 5.25. SECURITY & COMPLIANCE
+
+- Firebase Authentication.
+- RBAC.
+- Kiểm soát truy cập dữ liệu.
+- Xác thực đa yếu tố nếu được hỗ trợ.
+- Mã hóa dữ liệu khi truyền.
+- Bảo vệ dữ liệu lưu trữ.
+- Rate Limiting.
+- Chống spam.
+- Kiểm tra file upload.
+- Session Management.
+- Audit Logs.
+- Theo dõi đăng nhập.
+- Chính sách lưu trữ dữ liệu.
+- Sao lưu.
+- Khôi phục.
+- Xử lý yêu cầu xóa dữ liệu.
+- Quản lý sự đồng ý.
+- Phân quyền theo tổ chức.
+
+---
+
+# 6. CÁC LUỒNG NGHIỆP VỤ PHẢI HOẠT ĐỘNG
+
+## LUỒNG 01 – TẠO KHÓA HỌC
+
+Quản lý đào tạo → Tạo khóa học → Nhập thông tin → Xây dựng nội dung → Gán giảng viên → Thiết lập điều kiện → Lưu nháp → Gửi duyệt → Phê duyệt → Xuất bản.
+
+## LUỒNG 02 – ĐĂNG KÝ KHÓA HỌC
+
+Học viên → Tìm khóa học → Xem chi tiết → Đăng ký → Gửi yêu cầu → Phê duyệt nếu cần → Ghi danh → Nhận thông báo → Bắt đầu học.
+
+## LUỒNG 03 – HỌC TẬP
+
+Học viên đăng nhập → My Learning → Chọn khóa học → Mở bài học → Xem video / đọc tài liệu → Làm hoạt động → Đánh dấu hoàn thành → Cập nhật tiến độ → Chuyển bài học tiếp theo.
+
+## LUỒNG 04 – KIỂM TRA
+
+Giảng viên tạo đề → Chọn ngân hàng câu hỏi → Cấu hình thời gian → Công bố bài kiểm tra → Học viên làm bài → Nộp bài → Tự động chấm phần hỗ trợ → Giảng viên chấm phần còn lại → Công bố điểm.
+
+## LUỒNG 05 – CẤP CHỨNG CHỈ
+
+Học viên hoàn thành khóa học → Hệ thống kiểm tra điều kiện → Đạt yêu cầu → Sinh chứng chỉ → Gửi thông báo → Học viên tải PDF → Người nhận tra cứu và xác minh chứng chỉ.
+
+## LUỒNG 06 – QUẢN LÝ ĐÀO TẠO DOANH NGHIỆP
+
+Phòng ban đề xuất nhu cầu → Quản lý phê duyệt → Bộ phận đào tạo lập kế hoạch → Mở lớp → Ghi danh nhân viên → Tổ chức đào tạo → Đánh giá → Báo cáo hiệu quả.
+
+## LUỒNG 07 – AI TẠO NỘI DUNG
+
+Giảng viên chọn AI Course Creator → Nhập chủ đề → AI tạo đề cương → Giảng viên điều chỉnh → AI tạo bài học → Kiểm duyệt → Lưu nháp → Xuất bản.
+
+## LUỒNG 08 – CẢNH BÁO HỌC TẬP
+
+Hệ thống phân tích tiến độ → Phát hiện học viên có nguy cơ chậm tiến độ → Tạo cảnh báo → Gửi thông báo đúng đối tượng → Giảng viên hỗ trợ → Ghi nhận kết quả xử lý.
+
+---
+
+# 7. THIẾT KẾ DATABASE VÀ CẤU TRÚC DỮ LIỆU
+
+Sử dụng Firebase Authentication và Cloud Firestore làm nền tảng mặc định khi khả dụng trong Google AI Studio.
+
+Thiết kế dữ liệu có khả năng mở rộng, hỗ trợ truy vấn, phân quyền, lịch sử và liên kết giữa các module.
+
+Các collection đề xuất:
+
+### Nhóm người dùng
+
+- users
+- userProfiles
+- organizations
+- departments
+- groups
+- roles
+- permissions
+- userRoles
+
+### Nhóm đào tạo
+
+- courses
+- courseCategories
+- courseModules
+- lessons
+- learningActivities
+- learningPaths
+- competencies
+- trainingPrograms
+- trainingPlans
+- cohorts
+- classes
+- classSessions
+
+### Nhóm học liệu
+
+- assets
+- folders
+- mediaFiles
+- learningResources
+- courseVersions
+
+### Nhóm ghi danh và tiến độ
+
+- enrollments
+- learningProgress
+- learningEvents
+- attendance
+- learnerNotes
+- bookmarks
+
+### Nhóm kiểm tra
+
+- questionBanks
+- questions
+- quizzes
+- quizAttempts
+- assignments
+- submissions
+- gradebooks
+- grades
+- reviews
+
+### Nhóm chứng chỉ
+
+- certificates
+- certificateTemplates
+- badges
+- achievements
+
+### Nhóm tương tác
+
+- notifications
+- messages
+- conversations
+- forums
+- discussions
+- comments
+
+### Nhóm báo cáo
+
+- analytics
+- reportDefinitions
+- scheduledReports
+- KPIRecords
+
+### Nhóm AI
+
+- aiConversations
+- aiMessages
+- aiUsage
+- knowledgeDocuments
+- knowledgeChunks
+- aiTasks
+
+### Nhóm thương mại
+
+- products
+- orders
+- payments
+- coupons
+- subscriptions
+- refunds
+
+### Nhóm hệ thống
+
+- integrations
+- integrationLogs
+- auditLogs
+- activityLogs
+- systemSettings
+- securityEvents
+
+### Nguyên tắc thiết kế dữ liệu
+
+- Mỗi bản ghi có ID duy nhất.
+- Có createdAt và updatedAt.
+- Có createdBy và updatedBy khi cần.
+- Có organizationId khi thuộc phạm vi tổ chức.
+- Có trạng thái dữ liệu.
+- Có cơ chế soft delete.
+- Có lịch sử thay đổi cho dữ liệu quan trọng.
+- Có phân trang.
+- Có bộ lọc.
+- Có truy vấn tối ưu.
+- Không tải toàn bộ dữ liệu lớn về trình duyệt.
+- Sử dụng batch writes hoặc transactions khi cần bảo đảm tính nhất quán.
+- Thiết kế các chỉ mục Firestore cần thiết.
+- Không lưu mật khẩu hoặc secret trong Firestore dưới dạng văn bản thuần.
+
+Trước khi tạo database, hãy xây dựng sơ đồ liên kết dữ liệu, xác định quan hệ một-nhiều và nhiều-nhiều, xác định collection ownership và quy tắc bảo mật.
+
+---
+
+# 8. YÊU CẦU UI/UX – THIẾT KẾ GIAO DIỆN
+
+## 8.1. Phong cách thiết kế
+
+Tên phong cách:
+
+**Modern Glass UI – Colorful AI-Native SaaS Dashboard.**
+
+Định hướng:
+
+- Hiện đại.
+- Thân thiện.
+- Chuyên nghiệp.
+- Cao cấp.
+- Dễ thao tác.
+- Giàu tính trực quan.
+- Tối ưu cho môi trường đào tạo doanh nghiệp.
+
+### Màu sắc chủ đạo
+
+- Primary Blue: #1951FC.
+- Ocean Navy: xanh navy đậm.
+- Cyan: xanh Cyan.
+- Sky Blue: xanh da trời.
+- Soft White: trắng sáng.
+- Light Blue: xanh pastel.
+- Accent Green: xanh lá.
+- Accent Orange: cam.
+- Accent Purple: tím.
+
+### Background
+
+Sử dụng nền sáng trắng xanh nhạt, có thể phối gradient xanh dương – Cyan rất nhẹ.
+
+### Card UI
+
+- Glassmorphism.
+- White Glass.
+- Soft Neumorphism.
+- Border mảnh.
+- Shadow mềm.
+- Blur có kiểm soát.
+- Bo góc 14–20px.
+- Khoảng cách đồng đều.
+- Không lạm dụng hiệu ứng.
+
+### Font chữ
+
+Ưu tiên Be Vietnam Pro hoặc Inter, hỗ trợ tiếng Việt tốt.
+
+- Tiêu đề rõ ràng.
+- Nội dung dễ đọc.
+- Kích thước đồng bộ.
+- Hạn chế quá nhiều kiểu chữ.
+- Phân cấp thị giác rõ ràng.
+
+## 8.2. Bố cục website
+
+Thiết kế App Shell bao gồm:
+
+1. Header.
+2. Sidebar điều hướng.
+3. Main Content.
+4. Right Panel tùy chọn.
+5. Footer / trạng thái hệ thống khi phù hợp.
+
+Yêu cầu:
+
+- Header dạng capsule trắng, tinh gọn.
+- Sidebar có thể thu gọn.
+- Khu vực nội dung chính rộng và thoáng.
+- Toàn bộ ứng dụng nằm trong bố cục chính có bo góc 12px.
+- Padding nội bộ 15px.
+- Các khu vực Header, Main và Footer có độ nổi thị giác cân bằng.
+- Right Panel có thể sử dụng nền trong suốt.
+- Không che khuất nội dung.
+- Không để tràn ngang.
+- Ẩn thanh cuộn chỉ khi vẫn giữ được khả năng cuộn và điều hướng.
+- Không tạo khoảng trắng quá lớn hoặc card quá dày đặc.
+
+## 8.3. Responsive
+
+Desktop:
+
+- Sidebar cố định.
+- Dashboard nhiều cột.
+- Bảng dữ liệu đầy đủ.
+- Bộ lọc nâng cao.
+
+Tablet:
+
+- Sidebar thu gọn.
+- Card tự điều chỉnh.
+- Bảng có cuộn ngang hợp lý.
+
+Mobile:
+
+- Navigation dạng drawer hoặc bottom navigation phù hợp.
+- Card một cột hoặc hai cột tùy kích thước.
+- Nút bấm đủ lớn.
+- Form tối ưu cảm ứng.
+- Không để chữ và thành phần bị cắt.
+
+## 8.4. Hệ thống giao diện
+
+Tạo trang System Appearance cho phép lựa chọn theme:
+
+1. Glass UI Light.
+2. Ocean Navy Light.
+3. Ocean Navy Dark.
+4. Dark Neon.
+5. Flat Light.
+6. Vivo OriginOS Inspired.
+
+Cho phép cấu hình:
+
+- Màu chính website.
+- Màu phụ.
+- Background.
+- Card Background.
+- Card Border.
+- Card Shadow.
+- Border Radius.
+- Font.
+- Font Size.
+- Hiệu ứng chuyển động.
+- Hiệu ứng tương tác.
+- Mức độ Glass Blur.
+- Chế độ sáng / tối.
+
+Lưu lựa chọn giao diện theo người dùng và toàn hệ thống theo quyền cấu hình.
+
+---
+
+# 9. KIẾN TRÚC CÔNG NGHỆ
+
+Ưu tiên sử dụng công nghệ được Google AI Studio Build hỗ trợ tốt.
+
+## Frontend
+
+- React.
+- TypeScript.
+- Component-based Architecture.
+- Responsive Layout.
+- React Router hoặc giải pháp routing phù hợp.
+- Tailwind CSS hoặc CSS Modules.
+- Lucide Icons.
+- Recharts hoặc thư viện biểu đồ tương đương.
+- Form validation.
+- Toast Notifications.
+- Modal / Drawer.
+- Data Table.
+- Calendar.
+
+## Backend
+
+- Node.js server runtime.
+- API endpoints.
+- Server-side validation.
+- Authentication middleware.
+- Authorization middleware.
+- Business Logic Services.
+- Error Handling.
+- Logging.
+
+## Database
+
+- Firebase Authentication.
+- Cloud Firestore.
+- Firebase Storage hoặc giải pháp lưu trữ tương thích.
+
+## AI
+
+- Gemini API.
+- Server-side AI service.
+- RAG.
+- Vector Search khi được cấu hình.
+- AI Usage Tracking.
+
+## Deployment
+
+- Google AI Studio Build.
+- Cloud Run.
+- GitHub Sync.
+- Environment Secrets.
+
+### Quy tắc bảo mật API
+
+- Gemini API Key chỉ được sử dụng phía server.
+- Không hardcode API Key.
+- Không đưa API Key vào frontend.
+- Không đưa secret vào GitHub.
+- Validate mọi dữ liệu từ client.
+- Kiểm tra quyền ở backend.
+- Bảo vệ các endpoint nhạy cảm.
+
+Nếu Google AI Studio đề nghị thiết lập Firebase, hãy sử dụng luồng tích hợp để kích hoạt Firebase Authentication và Firestore.
+
+---
+
+# 10. YÊU CẦU VỀ CHỨC NĂNG CRUD
+
+Mọi module quản lý dữ liệu phải hỗ trợ nghiệp vụ phù hợp:
+
+### Create
+- Tạo dữ liệu mới.
+- Validate dữ liệu.
+- Thông báo thành công hoặc lỗi.
+
+### Read
+- Xem danh sách.
+- Xem chi tiết.
+- Tìm kiếm.
+- Lọc.
+- Phân trang.
+- Sắp xếp.
+
+### Update
+- Chỉnh sửa.
+- Lưu thay đổi.
+- Theo dõi lịch sử khi cần.
+
+### Delete
+- Xóa có xác nhận.
+- Soft delete khi cần.
+- Ngăn xóa dữ liệu đang có liên kết quan trọng.
+
+### Các thao tác bổ sung
+
+- Import.
+- Export.
+- Bulk Actions.
+- Duplicate.
+- Archive.
+- Restore.
+- Approve.
+- Reject.
+
+Mọi nút bấm phải có hành động thực tế. Không tạo nút trang trí không hoạt động.
+
+Không dùng các thông báo giả như "Đã lưu thành công" khi dữ liệu chưa thực sự được lưu vào backend.
+
+---
+
+# 11. DỮ LIỆU DEMO VÀ TRẠNG THÁI BAN ĐẦU
+
+Tạo bộ dữ liệu mẫu để kiểm thử giao diện và các chức năng.
+
+Ví dụ:
+
+- 3 tổ chức.
+- 8 phòng ban.
+- 5 danh mục khóa học.
+- 12 khóa học.
+- 30 bài học.
+- 10 giảng viên.
+- 50 học viên.
+- 8 lớp học.
+- 10 đề kiểm tra.
+- 100 câu hỏi.
+- 15 chứng chỉ mẫu.
+- Các lịch đào tạo trong tháng.
+- Dữ liệu hoạt động học tập.
+- Dữ liệu tiến độ.
+- Dữ liệu báo cáo mẫu.
+
+Dữ liệu mẫu phải có nhãn DEMO và có thể xóa.
+
+Không trộn dữ liệu demo với dữ liệu thực mà không có phân biệt.
+
+Tạo chức năng seed data dành riêng cho môi trường thử nghiệm. Không tự tạo tài khoản quản trị mặc định với mật khẩu công khai trong ứng dụng triển khai thật.
+
+---
+
+# 12. QUY TẮC XÂY DỰNG CODE
+
+1. Sử dụng TypeScript.
+2. Component phải tái sử dụng.
+3. Không viết toàn bộ website trong một file.
+4. Chia thư mục theo module nghiệp vụ.
+5. Tách UI khỏi business logic.
+6. Tách API service khỏi UI.
+7. Tách validation.
+8. Tách types và interfaces.
+9. Tách database access layer.
+10. Tách authentication và authorization.
+11. Không hardcode dữ liệu nghiệp vụ.
+12. Không dùng dữ liệu giả thay cho backend thật.
+13. Không tạo component trùng lặp không cần thiết.
+14. Không phá vỡ chức năng đã hoàn thiện khi cập nhật module khác.
+15. Không tự ý xóa dữ liệu.
+16. Không thay đổi tên và cấu trúc dữ liệu hiện có nếu chưa kiểm tra ảnh hưởng.
+17. Có Loading State.
+18. Có Empty State.
+19. Có Error State.
+20. Có Success State.
+21. Có Confirmation Dialog.
+22. Có xử lý lỗi API.
+23. Có xử lý dữ liệu không hợp lệ.
+24. Có bảo vệ route.
+25. Có kiểm soát quyền thao tác.
+26. Có kiểm thử các luồng quan trọng.
+
+### Cấu trúc thư mục định hướng
+
+src/
+- app/
+- components/
+- layouts/
+- pages/
+- modules/
+  - dashboard/
+  - users/
+  - organizations/
+  - courses/
+  - course-builder/
+  - learning-content/
+  - enrollment/
+  - classroom/
+  - assessments/
+  - gradebook/
+  - progress/
+  - certificates/
+  - communication/
+  - community/
+  - learning-path/
+  - training/
+  - analytics/
+  - ai-learning/
+  - ecommerce/
+  - integrations/
+  - settings/
+- hooks/
+- services/
+- api/
+- types/
+- schemas/
+- utils/
+- constants/
+- styles/
+
+server/
+- routes/
+- middleware/
+- services/
+- repositories/
+- integrations/
+- ai/
+- security/
+- validators/
+
+firebase/
+- configuration
+- security rules
+- indexes
+- seed data
+
+Tên thư mục và cấu trúc cuối cùng có thể điều chỉnh theo nền tảng AI Studio sinh code nhưng phải bảo đảm rõ ràng, có tổ chức và dễ mở rộng.
+
+---
+
+# 13. YÊU CẦU KIỂM THỬ VÀ CHẤT LƯỢNG
+
+Sau khi xây dựng, phải tự kiểm tra:
+
+### Kiểm thử giao diện
+
+- Các trang hiển thị đúng.
+- Sidebar hoạt động.
+- Menu đúng module.
+- Responsive.
+- Modal hoạt động.
+- Form hợp lệ.
+- Không vỡ layout.
+- Không lỗi font.
+- Không lỗi icon.
+- Không tràn màn hình.
+
+### Kiểm thử nghiệp vụ
+
+- Tạo khóa học.
+- Sửa khóa học.
+- Xóa khóa học.
+- Ghi danh.
+- Tạo bài học.
+- Cập nhật tiến độ.
+- Làm bài kiểm tra.
+- Tính điểm.
+- Cấp chứng chỉ.
+- Tìm kiếm.
+- Lọc.
+- Export.
+- Phân quyền.
+- Kiểm tra dữ liệu giữa các module.
+
+### Kiểm thử bảo mật
+
+- Người không có quyền không thể truy cập dữ liệu.
+- Học viên không xem dữ liệu riêng của người khác.
+- Giảng viên chỉ truy cập lớp được giao.
+- Quản trị đơn vị không vượt quyền dữ liệu.
+- Không lộ API Key.
+- Không cho phép người dùng tự nâng quyền.
+- Bảo vệ thao tác xóa và thay đổi điểm.
+
+### Kiểm thử kỹ thuật
+
+- Không có lỗi TypeScript nghiêm trọng.
+- Không có lỗi runtime.
+- Không có lỗi import.
+- Không có route chết.
+- Không có nút không hoạt động.
+- Không có dữ liệu giả được hiển thị như dữ liệu thật.
+- Không có lỗi mất dữ liệu khi tải lại trang.
+- Kiểm tra hiệu suất với danh sách lớn.
+- Kiểm tra phân trang và truy vấn.
+
+---
+
+# 14. KẾ HOẠCH TRIỂN KHAI
+
+Không xây dựng các module một cách rời rạc. Phải triển khai theo kiến trúc thống nhất.
+
+## PHASE 1 – FOUNDATION & CORE LMS
+
+Triển khai:
+
+- App Shell.
+- Dashboard.
+- Authentication.
+- User Management.
+- Organization Management.
+- RBAC.
+- Course Management.
+- Course Builder.
+- Learning Content.
+- Enrollment.
+- Learner Portal.
+- Learning Progress.
+- Assignment.
+- Quiz.
+- Gradebook.
+- Certificate.
+- Basic Notification.
+- Basic Reports.
+- System Settings.
+
+Mục tiêu: Có nền tảng LMS chạy được và kiểm thử được các luồng đào tạo chính.
+
+## PHASE 2 – ADVANCED LMS & TRAINING MANAGEMENT
+
+Triển khai:
+
+- Virtual Classroom.
+- Class Scheduling.
+- Attendance.
+- Advanced Assessments.
+- Learning Path.
+- Competency Management.
+- Community.
+- Communication.
+- Advanced Analytics.
+- Training Plans.
+- Training Budget.
+- Mobile Learning.
+- Gamification.
+- Integration Center.
+- SCORM / xAPI / QTI adapters.
+- Payment & E-commerce.
+
+Mục tiêu: Nâng cấp thành hệ thống quản lý đào tạo doanh nghiệp toàn diện.
+
+## PHASE 3 – AI-NATIVE LMS
+
+Triển khai:
+
+- Gemini API.
+- AI Tutor.
+- AI Learning Assistant.
+- AI Course Creator.
+- AI Quiz Generator.
+- AI Content Summary.
+- AI Knowledge Search.
+- RAG.
+- AI Recommendation.
+- AI Learning Analytics.
+- AI Agent Center.
+- AI Automation.
+
+Mục tiêu: Biến nền tảng thành hệ thống học tập thông minh, tự động hóa và cá nhân hóa.
+
+---
+
+# 15. NGUYÊN TẮC ĐẶC BIỆT KHI XÂY DỰNG TRÊN GOOGLE AI STUDIO
+
+- Không chỉ tạo thiết kế giao diện.
+- Không chỉ tạo trang Dashboard.
+- Không tạo trang chức năng chỉ có tiêu đề và dữ liệu minh họa.
+- Không dùng nút bấm giả.
+- Không bỏ qua Backend.
+- Không bỏ qua Database.
+- Không bỏ qua phân quyền.
+- Không bỏ qua bảo mật.
+- Không bỏ qua validation.
+- Không bỏ qua các quan hệ dữ liệu.
+- Không làm thay đổi module đã hoàn thành khi phát triển phần tiếp theo.
+- Không tự ý xóa hoặc đổi cấu trúc dữ liệu khi chưa đánh giá tác động.
+- Ưu tiên hoàn thiện nghiệp vụ cốt lõi trước.
+- Mỗi module phải có giao diện, logic, dữ liệu và trạng thái xử lý tương ứng.
+- Nếu tính năng yêu cầu API bên ngoài, phải tạo cấu hình tích hợp thực tế và trạng thái chưa kết nối rõ ràng.
+- Nếu tính năng chưa thể triển khai đầy đủ, phải ghi rõ giới hạn, không mô tả chức năng chưa hoạt động là đã hoàn thành.
+
+Khi tiếp tục phát triển ở những lần prompt sau, phải đọc và hiểu cấu trúc code hiện tại trước khi thay đổi, giữ nguyên các chức năng đã hoạt động và chỉ sửa các module liên quan.
+
+---
+
+# 16. KẾT QUẢ ĐẦU RA MONG MUỐN
+
+Hãy tạo ra một sản phẩm EDU LMS đáp ứng các tiêu chí:
+
+**Về giao diện**
+- Giao diện SaaS Dashboard hiện đại.
+- Đẹp, sáng, trực quan.
+- Responsive.
+- 14 nhóm menu nghiệp vụ rõ ràng.
+- Hệ thống theme linh hoạt.
+- UI đồng nhất trên tất cả trang.
+
+**Về chức năng**
+- 26 nhóm năng lực LMS.
+- Hệ thống phân quyền.
+- Nghiệp vụ đào tạo.
+- Quản lý học tập.
+- Kiểm tra đánh giá.
+- Quản lý chứng chỉ.
+- Báo cáo.
+- AI Learning.
+- Quản trị hệ thống.
+
+**Về công nghệ**
+- Frontend React + TypeScript.
+- Backend Node.js.
+- Firebase Authentication.
+- Firestore.
+- File Storage.
+- Gemini API.
+- API Integration.
+- Có khả năng triển khai Cloud Run.
+
+**Về vận hành**
+- Dữ liệu lưu trữ thực.
+- Chức năng CRUD thực.
+- Kiểm soát quyền truy cập.
+- Có dữ liệu demo.
+- Có xử lý lỗi.
+- Có kiểm thử.
+- Có thể phát triển mở rộng.
+
+### YÊU CẦU THỰC THI CUỐI CÙNG
+
+Bắt đầu xây dựng ứng dụng EDU LMS ngay trong Google AI Studio Build Mode.
+
+Trước tiên, phân tích và thiết lập kiến trúc tổng thể, sau đó triển khai App Shell, Database, Authentication, phân quyền và các module Core LMS.
+
+Tiếp tục xây dựng các module Advanced và AI theo kiến trúc đã xác lập.
+
+Không dừng lại ở bản thiết kế. Hãy tạo mã nguồn, các trang, component, backend, database và các luồng nghiệp vụ có thể kiểm tra được trong môi trường Preview.
+
+Sau mỗi giai đoạn:
+
+1. Kiểm tra cấu trúc code.
+2. Kiểm tra lỗi build.
+3. Kiểm tra các route.
+4. Kiểm tra CRUD.
+5. Kiểm tra dữ liệu.
+6. Kiểm tra phân quyền.
+7. Kiểm tra giao diện responsive.
+8. Sửa lỗi trước khi chuyển sang giai đoạn tiếp theo.
+
+**MỤC TIÊU CUỐI CÙNG: XÂY DỰNG EDU LMS THÀNH MỘT NỀN TẢNG QUẢN LÝ ĐÀO TẠO VÀ HỌC TẬP TRỰC TUYẾN TOÀN DIỆN, HIỆN ĐẠI, AI-NATIVE, CÓ KIẾN TRÚC FULL-STACK VÀ CÓ KHẢ NĂNG MỞ RỘNG CHO DOANH NGHIỆP, TRUNG TÂM ĐÀO TẠO VÀ TỔ CHỨC GIÁO DỤC.**

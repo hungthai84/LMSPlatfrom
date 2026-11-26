@@ -1,0 +1,418 @@
+{
+  "entities": {
+    "UserPublic": {
+      "title": "UserPublic",
+      "description": "Non-PII public/operational profile for an EDU LMS user with RBAC role assignment.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "avatar": { "type": "string", "maxLength": 500 },
+        "role": {
+          "type": "string",
+          "enum": [
+            "super_admin",
+            "system_admin",
+            "training_director",
+            "training_manager",
+            "organization_admin",
+            "department_manager",
+            "instructor",
+            "teaching_assistant",
+            "evaluator",
+            "learner",
+            "auditor",
+            "guardian"
+          ]
+        },
+        "orgId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "deptId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "xp": { "type": "number" },
+        "level": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "suspended", "archived"] },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "role", "status", "ownerId", "createdAt", "updatedAt"]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII document for user contact details.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 200 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "employeeCode": { "type": "string", "maxLength": 64 },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "ownerId", "createdAt", "updatedAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Authoritative admin role grant record.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["super_admin", "system_admin", "training_director", "training_manager"] },
+        "grantedBy": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "grantedBy", "createdAt"]
+    },
+    "Organization": {
+      "title": "Organization",
+      "description": "Enterprise organization or training branch.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "minLength": 1, "maxLength": 32, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "orgType": { "type": "string", "enum": ["enterprise", "academy", "branch", "partner"] },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "name", "orgType", "status", "ownerId", "createdAt", "updatedAt"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Department within an organization.",
+      "type": "object",
+      "properties": {
+        "orgId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "managerName": { "type": "string", "maxLength": 120 },
+        "budget": { "type": "number" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orgId", "name", "ownerId", "createdAt", "updatedAt"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "LMS Course entity supporting draft/approval/published lifecycle.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string", "minLength": 1, "maxLength": 32, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "minLength": 2, "maxLength": 200 },
+        "category": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "level": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+        "durationHours": { "type": "number" },
+        "price": { "type": "number" },
+        "passingScore": { "type": "number" },
+        "status": { "type": "string", "enum": ["draft", "pending", "published", "active", "completed", "archived"] },
+        "isPublic": { "type": "boolean" },
+        "instructorId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "instructorName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "thumbnailUrl": { "type": "string", "maxLength": 500 },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["code", "title", "category", "level", "status", "isPublic", "instructorId", "instructorName", "ownerId", "createdAt", "updatedAt"]
+    },
+    "CourseLesson": {
+      "title": "CourseLesson",
+      "description": "Lesson item inside a course created in Course Builder.",
+      "type": "object",
+      "properties": {
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "chapterTitle": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "lessonType": { "type": "string", "enum": ["video", "document", "quiz", "scorm", "interactive"] },
+        "durationMinutes": { "type": "number" },
+        "orderIndex": { "type": "number" },
+        "content": { "type": "string", "maxLength": 5000 },
+        "mediaUrl": { "type": "string", "maxLength": 500 },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["courseId", "chapterTitle", "title", "lessonType", "orderIndex", "ownerId", "createdAt", "updatedAt"]
+    },
+    "Enrollment": {
+      "title": "Enrollment",
+      "description": "Learner enrollment, approval workflow, and progress state.",
+      "type": "object",
+      "properties": {
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "courseTitle": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "status": { "type": "string", "enum": ["pending", "approved", "active", "completed", "rejected", "waitlist"] },
+        "progressPercent": { "type": "number" },
+        "score": { "type": "number" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["courseId", "courseTitle", "userId", "userName", "status", "progressPercent", "ownerId", "createdAt", "updatedAt"]
+    },
+    "ClassSession": {
+      "title": "ClassSession",
+      "description": "Scheduled offline/online/blended class session and attendance tracking.",
+      "type": "object",
+      "properties": {
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "instructorName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "room": { "type": "string", "maxLength": 120 },
+        "platform": { "type": "string", "enum": ["offline", "zoom", "google_meet", "teams", "bbb"] },
+        "meetingStatus": { "type": "string", "enum": ["unconfigured", "scheduled", "live", "ended"] },
+        "scheduleTime": { "type": "string", "maxLength": 80 },
+        "attendanceCount": { "type": "number" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["courseId", "title", "instructorName", "platform", "meetingStatus", "scheduleTime", "ownerId", "createdAt", "updatedAt"]
+    },
+    "Assessment": {
+      "title": "Assessment",
+      "description": "Exam, quiz, assignment, or practice item.",
+      "type": "object",
+      "properties": {
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "assessmentType": { "type": "string", "enum": ["quiz", "assignment", "exam", "practice"] },
+        "durationMinutes": { "type": "number" },
+        "passingScore": { "type": "number" },
+        "maxScore": { "type": "number" },
+        "status": { "type": "string", "enum": ["draft", "published", "closed"] },
+        "isPublic": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["courseId", "title", "assessmentType", "passingScore", "maxScore", "status", "isPublic", "ownerId", "createdAt", "updatedAt"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "Learner assessment submission and gradebook entry.",
+      "type": "object",
+      "properties": {
+        "assessmentId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "content": { "type": "string", "maxLength": 4000 },
+        "score": { "type": "number" },
+        "maxScore": { "type": "number" },
+        "status": { "type": "string", "enum": ["assigned", "submitted", "graded", "appeal"] },
+        "feedback": { "type": "string", "maxLength": 1000 },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["assessmentId", "courseId", "studentId", "studentName", "status", "maxScore", "ownerId", "createdAt", "updatedAt"]
+    },
+    "Certificate": {
+      "title": "Certificate",
+      "description": "Issued completion certificate with verification code.",
+      "type": "object",
+      "properties": {
+        "verifyCode": { "type": "string", "minLength": 4, "maxLength": 64, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "courseTitle": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "status": { "type": "string", "enum": ["valid", "revoked"] },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["verifyCode", "userId", "userName", "courseId", "courseTitle", "status", "ownerId", "createdAt", "updatedAt"]
+    },
+    "LearningAsset": {
+      "title": "LearningAsset",
+      "description": "Learning material stored in the Learning Content Library.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "assetType": { "type": "string", "enum": ["video", "pdf", "doc", "ppt", "ebook", "scorm", "image", "audio"] },
+        "sizeLabel": { "type": "string", "maxLength": 40 },
+        "folder": { "type": "string", "maxLength": 100 },
+        "url": { "type": "string", "maxLength": 500 },
+        "isPublic": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "assetType", "folder", "isPublic", "ownerId", "createdAt", "updatedAt"]
+    },
+    "LearningPath": {
+      "title": "LearningPath",
+      "description": "Role-based or competency-based learning roadmap.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "targetRole": { "type": "string", "maxLength": 120 },
+        "department": { "type": "string", "maxLength": 120 },
+        "coursesCount": { "type": "number" },
+        "isMandatory": { "type": "boolean" },
+        "isPublic": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "targetRole", "coursesCount", "isMandatory", "isPublic", "ownerId", "createdAt", "updatedAt"]
+    },
+    "TrainingPlan": {
+      "title": "TrainingPlan",
+      "description": "Enterprise training plan and budget approval record.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "period": { "type": "string", "maxLength": 60 },
+        "department": { "type": "string", "maxLength": 120 },
+        "budgetAllocated": { "type": "number" },
+        "budgetSpent": { "type": "number" },
+        "approvalStatus": { "type": "string", "enum": ["draft", "pending", "approved", "rejected"] },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "period", "department", "budgetAllocated", "approvalStatus", "ownerId", "createdAt", "updatedAt"]
+    },
+    "DiscussionPost": {
+      "title": "DiscussionPost",
+      "description": "Community learning forum post or Q&A discussion.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "content": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "category": { "type": "string", "maxLength": 80 },
+        "authorName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "likesCount": { "type": "number" },
+        "isPublic": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "category", "authorName", "likesCount", "isPublic", "ownerId", "createdAt", "updatedAt"]
+    },
+    "CommerceOrder": {
+      "title": "CommerceOrder",
+      "description": "Course purchase order awaiting verified payment webhook.",
+      "type": "object",
+      "properties": {
+        "courseId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "courseTitle": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "amount": { "type": "number" },
+        "couponCode": { "type": "string", "maxLength": 40 },
+        "paymentStatus": { "type": "string", "enum": ["pending_webhook", "verified", "refunded"] },
+        "isDemo": { "type": "boolean" },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["courseId", "courseTitle", "amount", "paymentStatus", "ownerId", "createdAt", "updatedAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable security and operational audit log.",
+      "type": "object",
+      "properties": {
+        "actorName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "action": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "targetType": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "details": { "type": "string", "maxLength": 500 },
+        "ownerId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["actorName", "action", "targetType", "ownerId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserPublic" },
+      "description": "Non-PII public operational profiles indexed by Firebase UID."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Strictly isolated PII document for each user."
+    },
+    "/admins/{userId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Authoritative admin role documents."
+    },
+    "/organizations/{orgId}": {
+      "schema": { "$ref": "#/entities/Organization" },
+      "description": "Organizations and training branches."
+    },
+    "/departments/{deptId}": {
+      "schema": { "$ref": "#/entities/Department" },
+      "description": "Departments within organizations."
+    },
+    "/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/Course" },
+      "description": "LMS courses catalog and lifecycle state."
+    },
+    "/courses/{courseId}/lessons/{lessonId}": {
+      "schema": { "$ref": "#/entities/CourseLesson" },
+      "description": "Lessons belonging to a course."
+    },
+    "/enrollments/{enrollmentId}": {
+      "schema": { "$ref": "#/entities/Enrollment" },
+      "description": "Course enrollment and progress tracking."
+    },
+    "/classSessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/ClassSession" },
+      "description": "Offline/Virtual classroom sessions."
+    },
+    "/assessments/{assessmentId}": {
+      "schema": { "$ref": "#/entities/Assessment" },
+      "description": "Quizzes, exams, and assignments."
+    },
+    "/submissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/Submission" },
+      "description": "Learner submissions and grades."
+    },
+    "/certificates/{certId}": {
+      "schema": { "$ref": "#/entities/Certificate" },
+      "description": "Issued certificates with QR verification codes."
+    },
+    "/assets/{assetId}": {
+      "schema": { "$ref": "#/entities/LearningAsset" },
+      "description": "Learning content library resources."
+    },
+    "/learningPaths/{pathId}": {
+      "schema": { "$ref": "#/entities/LearningPath" },
+      "description": "Competency frameworks and learning roadmaps."
+    },
+    "/trainingPlans/{planId}": {
+      "schema": { "$ref": "#/entities/TrainingPlan" },
+      "description": "Enterprise training plans and budgets."
+    },
+    "/discussions/{postId}": {
+      "schema": { "$ref": "#/entities/DiscussionPost" },
+      "description": "Community learning forum posts."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/CommerceOrder" },
+      "description": "E-commerce course orders."
+    },
+    "/auditLogs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Immutable operational audit logs."
+    }
+  }
+}

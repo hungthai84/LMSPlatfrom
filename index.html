@@ -1,31 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduSmart - Nền tảng Học trực tuyến Thông minh</title>
-    <meta name="description" content="EduSmart Online Learning - Nền tảng LMS hiện đại với giao diện tinh tế, trợ lý AI học tập và quản lý tiến độ chi tiết." />
+    <title>EDU LMS — Hệ thống Quản lý Đào tạo & Học tập Trực tuyến AI-Native</title>
+    <meta name="description" content="EDU LMS - Nền tảng quản lý đào tạo doanh nghiệp & học tập trực tuyến AI-Native tích hợp Firebase, RBAC 12 vai trò và Gemini AI." />
+    <meta property="og:title" content="EDU LMS — Enterprise AI-Native LMS" />
+    <meta property="og:description" content="Hệ thống quản lý đào tạo và học tập trực tuyến toàn diện với kiến trúc Glass Liquid đa màu sắc." />
     <link rel="icon" type="image/png" href="/01_logo_edusmart.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <script>
-      // Prevent "Cannot set property fetch of #<Window> which has only a getter"
-      // by intercepting assignments to window.fetch
       const originalFetch = window.fetch;
       Object.defineProperty(window, 'fetch', {
         configurable: true,
         enumerable: true,
         get: () => originalFetch,
-        set: (val) => {
-          // ignore polyfill assignments
-        }
+        set: (val) => {}
       });
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

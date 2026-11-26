@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { UserPlus, Mail, ShieldAlert, GraduationCap, Users } from "lucide-react";
 import { ClassItem, UserProfile } from "../types";
+import { useLms } from "../contexts/LmsContext";
+import { tr } from "../i18n/translations";
 
 interface PeopleTabProps {
   classItem: ClassItem;
@@ -15,93 +17,93 @@ export default function PeopleTab({
   allUsers,
   onInviteStudent
 }: PeopleTabProps) {
+  const { language } = useLms();
   const [showInviteModal, setShowInviteModal] = useState(false);
 
-  // List students currently in this class
   const joinedStudents = allUsers.filter((u) => classItem.students.includes(u.id));
 
-  // Find teacher of this class
   const classTeacher = allUsers.find((u) => u.id === classItem.teacherId) || {
     name: classItem.teacherName,
     avatar: classItem.teacherAvatar,
     email: "teacher@classroom.edu.vn"
   };
 
-  // Find students NOT in this class for the invitation dropdown
   const nonJoinedStudents = allUsers.filter(
     (u) => u.role === "student" && !classItem.students.includes(u.id)
   );
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8">
+    <div className="mx-auto max-w-2xl px-2 sm:px-4 py-6 space-y-6">
       {/* SECTION: TEACHERS */}
-      <div className="mb-10">
-        <div className="flex items-center justify-between border-b border-[#1e88e5] pb-3 mb-5">
-          <h3 className="text-xl font-bold text-[#1e88e5] flex items-center gap-2 select-none">
-            <GraduationCap className="h-5.5 w-5.5" />
-            Giáo viên
+      <div className="glass-liquid-card-blue rounded-[14px] border border-white/60 p-5 shadow-sm">
+        <div className="flex items-center justify-between border-b border-blue-200/60 pb-3 mb-4">
+          <h3 className="text-lg sm:text-xl font-bold text-blue-600 flex items-center gap-2 select-none">
+            <GraduationCap className="h-5 w-5" />
+            {tr(language, "Giáo viên", "Teachers")}
           </h3>
         </div>
 
-        <div className="flex items-center gap-4 py-2 pl-2">
+        <div className="flex items-center gap-4 py-1">
           <img
             src={classTeacher.avatar}
             alt={classTeacher.name}
-            className="h-10 w-10 rounded-full object-cover border border-gray-200"
+            className="h-10 w-10 rounded-full object-cover border border-white"
             referrerPolicy="no-referrer"
           />
-          <div className="flex-1">
-            <p className="text-sm font-bold text-gray-800">{classTeacher.name}</p>
-            <p className="text-xs text-gray-400">{classTeacher.email}</p>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-bold text-slate-800 truncate">{classTeacher.name}</p>
+            <p className="text-xs text-slate-500 truncate">{classTeacher.email}</p>
           </div>
-          <button className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-[#1e88e5]">
+          <button className="rounded-[14px] p-2 text-slate-400 hover:bg-white/70 hover:text-blue-600 transition-colors">
             <Mail className="h-4 w-4" />
           </button>
         </div>
       </div>
 
       {/* SECTION: STUDENTS */}
-      <div>
-        <div className="flex items-center justify-between border-b border-[#dadce0] pb-3 mb-5">
-          <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2 select-none">
-            <Users className="h-5.5 w-5.5 text-gray-500" />
-            Học viên
+      <div className="glass-liquid-card rounded-[14px] border border-white/60 p-5 shadow-sm">
+        <div className="flex items-center justify-between border-b border-white/60 pb-3 mb-4">
+          <h3 className="text-lg sm:text-xl font-bold text-slate-800 flex items-center gap-2 select-none">
+            <Users className="h-5 w-5 text-slate-500" />
+            {tr(language, "Học viên", "Students")}
           </h3>
-          <span className="text-xs text-gray-400 font-bold">
-            {joinedStudents.length} học viên
-          </span>
-          {activeUser.role === "teacher" && (
-            <button
-              onClick={() => setShowInviteModal(true)}
-              className="rounded-full p-2 text-[#1e88e5] hover:bg-blue-50"
-              title="Mời học viên"
-            >
-              <UserPlus className="h-5 w-5" />
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-500 font-bold">
+              {joinedStudents.length} {tr(language, "học viên", "students")}
+            </span>
+            {activeUser.role === "teacher" && (
+              <button
+                onClick={() => setShowInviteModal(true)}
+                className="rounded-[14px] p-2 text-blue-600 hover:bg-blue-50 transition-colors"
+                title={tr(language, "Mời học viên", "Invite student")}
+              >
+                <UserPlus className="h-5 w-5" />
+              </button>
+            )}
+          </div>
         </div>
 
         {joinedStudents.length === 0 ? (
-          <div className="text-center py-10 border border-dashed border-gray-200 rounded-lg bg-gray-50/50">
-            <ShieldAlert className="h-10 w-10 text-gray-300 mx-auto mb-2" />
-            <p className="text-sm text-gray-500 font-medium">Lớp học chưa có học viên</p>
-            <p className="text-xs text-gray-400">Chia sẻ mã lớp học hoặc thêm học viên bằng nút mời.</p>
+          <div className="text-center py-10 border border-dashed border-slate-200 rounded-[14px] bg-white/50">
+            <ShieldAlert className="h-10 w-10 text-slate-300 mx-auto mb-2" />
+            <p className="text-sm text-slate-600 font-medium">{tr(language, "Lớp học chưa có học viên", "No students enrolled yet")}</p>
+            <p className="text-xs text-slate-400">{tr(language, "Chia sẻ mã lớp học hoặc thêm học viên bằng nút mời.", "Share the class code or invite students directly.")}</p>
           </div>
         ) : (
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-white/50">
             {joinedStudents.map((student) => (
-              <div key={student.id} className="flex items-center gap-4 py-3 pl-2 hover:bg-gray-50/30 transition-colors">
+              <div key={student.id} className="flex items-center gap-4 py-3 hover:bg-white/40 rounded-[14px] px-2 transition-colors">
                 <img
                   src={student.avatar}
                   alt={student.name}
-                  className="h-9 w-9 rounded-full object-cover border border-gray-100"
+                  className="h-9 w-9 rounded-full object-cover border border-white"
                   referrerPolicy="no-referrer"
                 />
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-gray-800">{student.name}</p>
-                  <p className="text-xs text-gray-400">{student.email}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-slate-800 truncate">{student.name}</p>
+                  <p className="text-xs text-slate-400 truncate">{student.email}</p>
                 </div>
-                <button className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-[#1e88e5]">
+                <button className="rounded-[14px] p-2 text-slate-400 hover:bg-white/70 hover:text-blue-600 transition-colors">
                   <Mail className="h-4 w-4" />
                 </button>
               </div>
@@ -112,36 +114,36 @@ export default function PeopleTab({
 
       {/* Invitation Modal */}
       {showInviteModal && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg shadow-xl border border-gray-200 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="bg-[#1e88e5] text-white p-4 flex items-center justify-between">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="glass-liquid-card rounded-[14px] shadow-2xl border border-white/60 w-full max-w-md max-h-[85dvh] flex flex-col overflow-hidden">
+            <div className="bg-blue-600 text-white p-4 flex items-center justify-between shrink-0">
               <h3 className="font-bold text-base flex items-center gap-2">
                 <UserPlus className="h-5 w-5" />
-                Mời học viên vào lớp
+                {tr(language, "Mời học viên vào lớp", "Invite students")}
               </h3>
               <button
                 onClick={() => setShowInviteModal(false)}
-                className="text-white hover:text-gray-200 font-bold"
+                className="rounded-[14px] px-2 py-1 text-white hover:bg-white/20 font-bold"
               >
                 ✕
               </button>
             </div>
 
-            <div className="p-5">
-              <p className="text-xs text-gray-500 leading-relaxed mb-4">
-                Chọn tài khoản học viên giả lập từ hệ thống để thêm trực tiếp vào lớp học này.
+            <div className="p-5 overflow-y-auto">
+              <p className="text-xs text-slate-500 leading-relaxed mb-4">
+                {tr(language, "Chọn tài khoản học viên từ hệ thống để thêm trực tiếp vào lớp học này.", "Select a student account from the system to enroll directly into this class.")}
               </p>
 
               {nonJoinedStudents.length === 0 ? (
-                <div className="text-center py-4 bg-gray-50 rounded border text-xs text-gray-500">
-                  Tất cả các tài khoản học viên mô phỏng đều đã có mặt trong lớp này!
+                <div className="text-center py-4 bg-white/70 rounded-[14px] border border-white/60 text-xs text-slate-500">
+                  {tr(language, "Tất cả tài khoản học viên đều đã có mặt trong lớp này!", "All student accounts are already enrolled in this class!")}
                 </div>
               ) : (
                 <div className="space-y-2 max-h-60 overflow-y-auto">
                   {nonJoinedStudents.map((student) => (
                     <div
                       key={student.id}
-                      className="flex items-center justify-between border border-gray-100 rounded-md p-2.5 hover:bg-gray-50"
+                      className="flex items-center justify-between border border-white/70 bg-white/70 rounded-[14px] p-2.5 hover:bg-white transition-colors"
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
                         <img
@@ -151,8 +153,8 @@ export default function PeopleTab({
                           referrerPolicy="no-referrer"
                         />
                         <div className="min-w-0">
-                          <p className="text-xs font-bold text-gray-800 truncate">{student.name}</p>
-                          <p className="text-[10px] text-gray-400 truncate">{student.email}</p>
+                          <p className="text-xs font-bold text-slate-800 truncate">{student.name}</p>
+                          <p className="text-[10px] text-slate-400 truncate">{student.email}</p>
                         </div>
                       </div>
                       <button
@@ -160,9 +162,9 @@ export default function PeopleTab({
                           onInviteStudent(student.id);
                           setShowInviteModal(false);
                         }}
-                        className="rounded bg-blue-50 px-3 py-1.5 text-[10px] font-bold text-blue-700 border border-blue-100 hover:bg-blue-100 transition-colors"
+                        className="rounded-[14px] bg-blue-50 px-3 py-1.5 text-[11px] font-bold text-blue-700 border border-blue-100 hover:bg-blue-100 transition-colors shrink-0"
                       >
-                        Thêm
+                        {tr(language, "Thêm", "Add")}
                       </button>
                     </div>
                   ))}
@@ -170,12 +172,12 @@ export default function PeopleTab({
               )}
             </div>
 
-            <div className="bg-gray-50 p-4 border-t border-gray-100 flex justify-end">
+            <div className="bg-white/60 p-4 border-t border-white/60 flex justify-end shrink-0">
               <button
                 onClick={() => setShowInviteModal(false)}
-                className="rounded px-4 py-2 text-xs font-semibold text-gray-500 hover:bg-gray-100"
+                className="rounded-[14px] px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-white/80"
               >
-                Đóng
+                {tr(language, "Đóng", "Close")}
               </button>
             </div>
           </div>

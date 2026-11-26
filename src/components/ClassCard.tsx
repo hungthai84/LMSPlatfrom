@@ -1,6 +1,8 @@
 import React from "react";
 import { Folder, MoreVertical, Copy, ClipboardList } from "lucide-react";
 import { ClassItem } from "../types";
+import { useLms } from "../contexts/LmsContext";
+import { tr } from "../i18n/translations";
 
 interface ClassCardProps {
   cardOpacity?: number;
@@ -15,26 +17,27 @@ export default function ClassCard({
   classItem,
   onSelect,
   onCopyCode,
-  activeUserRole,
   cardOpacity = 100
 }: ClassCardProps) {
+  const { language } = useLms();
   const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation();
     onCopyCode(classItem.code);
   };
 
   return (
-    <div 
+    <div
       onClick={() => onSelect(classItem.id)}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 transition-all duration-200 hover:shadow-md cursor-pointer h-[280px]" style={{ backgroundColor: `rgba(255, 255, 255, ${cardOpacity / 100})`, backdropFilter: cardOpacity < 100 ? "blur(10px)" : "none" }}
+      className="glass-liquid-card group relative flex flex-col overflow-hidden rounded-[14px] border border-white/60 transition-all duration-200 hover:shadow-lg cursor-pointer h-[280px]"
+      style={cardOpacity < 100 ? { backgroundColor: `rgba(255, 255, 255, ${cardOpacity / 100})` } : undefined}
     >
       {/* Top Header Banner */}
-      <div 
-        style={{ background: classItem.bannerGradient }} 
-        className="relative flex flex-col justify-between p-6 text-white h-[130px] rounded-t-xl"
+      <div
+        style={{ background: classItem.bannerGradient }}
+        className="relative flex flex-col justify-between p-5 sm:p-6 text-white h-[130px] rounded-t-[14px]"
       >
         <div className="flex items-start justify-between">
-          <div className="pr-4">
+          <div className="pr-4 min-w-0">
             <h3 className="line-clamp-1 text-lg font-bold hover:underline select-none">
               {classItem.name}
             </h3>
@@ -44,11 +47,11 @@ export default function ClassCard({
               </p>
             )}
           </div>
-          <button 
+          <button
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="rounded-full p-1.5 hover:bg-white/15 text-white/90"
+            className="rounded-[14px] p-1.5 hover:bg-white/15 text-white/90 shrink-0"
           >
             <MoreVertical className="h-5 w-5" />
           </button>
@@ -71,26 +74,26 @@ export default function ClassCard({
       </div>
 
       {/* Card Content - Upcoming Tasks */}
-      <div className="flex-1 p-6 pt-6 text-xs text-[#5f6368] border-b border-gray-100 flex flex-col justify-between select-none">
+      <div className="flex-1 p-5 pt-6 text-xs text-slate-600 border-b border-white/50 flex flex-col justify-between select-none">
         <div>
-          <p className="font-semibold text-[10px] text-gray-400 uppercase tracking-wider mb-2">
-            Sắp diễn ra
+          <p className="font-semibold text-[10px] text-slate-400 uppercase tracking-wider mb-1.5">
+            {tr(language, "Sắp diễn ra", "Upcoming")}
           </p>
-          <div className="flex items-center gap-2 text-gray-700 hover:text-blue-600 hover:underline">
-            <ClipboardList className="h-4 w-4 text-gray-400 shrink-0" />
-            <span className="truncate">Kiểm tra & thực hành Chương 1</span>
+          <div className="flex items-center gap-2 text-slate-700 hover:text-blue-600 hover:underline">
+            <ClipboardList className="h-4 w-4 text-slate-400 shrink-0" />
+            <span className="truncate">{tr(language, "Kiểm tra & thực hành Chương 1", "Chapter 1 Quiz & Practice")}</span>
           </div>
         </div>
 
         {/* Class Code badge */}
-        <div className="flex items-center justify-between mt-3 bg-gray-50 rounded px-2.5 py-1.5 border border-gray-100">
-          <span className="font-medium text-[10px] uppercase text-gray-500">Mã lớp:</span>
+        <div className="flex items-center justify-between mt-3 bg-white/70 rounded-[14px] px-3 py-1.5 border border-white/70">
+          <span className="font-medium text-[10px] uppercase text-slate-500">{tr(language, "Mã lớp:", "Code:")}</span>
           <div className="flex items-center gap-1.5">
-            <code className="font-mono text-sm font-bold text-gray-800">{classItem.code}</code>
-            <button 
+            <code className="font-mono text-sm font-bold text-slate-800">{classItem.code}</code>
+            <button
               onClick={handleCopy}
-              className="rounded p-1 hover:bg-gray-200 text-[#5f6368] transition-colors"
-              title="Sao chép mã lớp"
+              className="rounded-[14px] p-1 hover:bg-slate-200/70 text-slate-600 transition-colors"
+              title={tr(language, "Sao chép mã lớp", "Copy class code")}
             >
               <Copy className="h-3.5 w-3.5" />
             </button>
@@ -99,24 +102,24 @@ export default function ClassCard({
       </div>
 
       {/* Card Footer Actions */}
-      <div className="flex h-12 items-center justify-end px-4 gap-2 text-gray-500">
-        <button 
+      <div className="flex h-12 items-center justify-end px-4 gap-2 text-slate-500">
+        <button
           onClick={(e) => {
             e.stopPropagation();
             onSelect(classItem.id);
           }}
-          className="rounded-full p-2 hover:bg-gray-100 hover:text-[#1e88e5]"
-          title="Xem bài tập"
+          className="rounded-[14px] p-2 hover:bg-white/70 hover:text-blue-600 transition-colors"
+          title={tr(language, "Xem bài tập", "View classwork")}
         >
           <ClipboardList className="h-5 w-5" />
         </button>
-        <button 
+        <button
           onClick={(e) => {
             e.stopPropagation();
             onSelect(classItem.id);
           }}
-          className="rounded-full p-2 hover:bg-gray-100 hover:text-[#1e88e5]"
-          title="Thư mục lớp học"
+          className="rounded-[14px] p-2 hover:bg-white/70 hover:text-blue-600 transition-colors"
+          title={tr(language, "Thư mục lớp học", "Class folder")}
         >
           <Folder className="h-5 w-5" />
         </button>
